@@ -12,7 +12,13 @@ interface Props {
 }
 
 export default function Controls({ className }: Props) {
-    const { currentSong: song, isPaused, setIsPaused } = usePlayerStore();
+    const {
+        currentSong: song,
+        isPaused,
+        setIsPaused,
+        next,
+        prev,
+    } = usePlayerStore();
 
     useEffect(() => {
         setIsPaused(false);
@@ -25,6 +31,7 @@ export default function Controls({ className }: Props) {
     return (
         <div className={cn("flex gap-5 items-center text-3xl", className)}>
             <motion.button
+                onClick={prev}
                 disabled={song === null ? true : false}
                 whileTap={{
                     scale: 1.1,
@@ -47,6 +54,7 @@ export default function Controls({ className }: Props) {
                 {!isPaused ? <FaPause /> : <FaPlay className="ml-0.5" />}
             </motion.button>
             <motion.button
+                onClick={next}
                 disabled={song === null ? true : false}
                 whileTap={{
                     scale: 1.1,

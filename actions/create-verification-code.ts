@@ -4,6 +4,7 @@ import sendEmail from "@/lib/send-email";
 import { prisma } from "@/prisma/prisma-client";
 import fs from "fs";
 import Handlebars from "handlebars";
+import path from "path";
 
 function generateVerificationCode(codeLength: number = 6) {
     let code = "";
@@ -37,7 +38,7 @@ export default async function createVerificationCode(
     });
 
     const htmlTemplate = fs.readFileSync(
-        "./email-templates/verification.handlebars",
+        path.join(process.cwd(), "/email-templates/verification.handlebars"),
         "utf8"
     );
 

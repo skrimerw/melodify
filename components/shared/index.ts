@@ -17,6 +17,7 @@ import HistoryForward from "./HistoryForward";
 import FormProfile from "./FormProfile";
 import VerificationCode from "./VerificationCode";
 import VerificationDialog from "./VerificationDialog";
+import NewestSongsContainer from "./NewestSongsContainer";
 
 export {
     Sidebar,
@@ -38,4 +39,5 @@ export {
     FormProfile,
     VerificationCode,
     VerificationDialog,
+    NewestSongsContainer
 };
