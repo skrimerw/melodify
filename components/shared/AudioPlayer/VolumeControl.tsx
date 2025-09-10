@@ -91,7 +91,7 @@ export default function VolumeControl({ audioRef, className }: Props) {
 
     return (
         <div className={cn("relative group gap-2", className)}>
-            <div className="absolute bottom-7.5 -right-1 rounded-full p-3 border border-input bg-card invisible opacity-0 transition-all duration-300 delay-150 group-hover:visible group-hover:opacity-100">
+            <div className="absolute bottom-7.5 -right-1 rounded-full p-3 border border-input bg-card invisible opacity-0 transition-all duration-300 delay-150 group-hover:visible group-hover:opacity-100 group-focus:visible group-focus:opacity-100">
                 <VolumeSlider
                     onValueChange={(value) => onVolumeChange(value)}
                     defaultValue={volume}
@@ -101,7 +101,7 @@ export default function VolumeControl({ audioRef, className }: Props) {
                     className={cn("w-10 !h-[50px]")}
                 />
             </div>
-            <div className="relative text-[27px] h-5.5 text-typography-gray cursor-pointer group-hover:text-primary mb-1">{getVolumeIcon()}</div>
+            <div className="relative text-[27px] h-5.5 text-typography-gray cursor-pointer group-hover:text-primary group-focus:text-primary mb-1">{getVolumeIcon()}</div>
         </div>
     );
 }

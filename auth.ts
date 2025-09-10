@@ -4,7 +4,6 @@ import Github from "next-auth/providers/github";
 import { prisma } from "./prisma/prisma-client";
 import { JWT } from "next-auth/jwt";
 import bcrypt from "bcrypt";
-import { randomBytes } from "crypto";
 
 declare module "next-auth" {
     interface Session {
@@ -114,10 +113,7 @@ export const { handlers, signIn, signOut, auth, unstable_update } = NextAuth({
                         username: user.name || "User #" + user.id,
                         provider: account?.provider,
                         providerId: account?.providerAccountId,
-                        password: bcrypt.hashSync(
-                            randomBytes(16).toString("hex"),
-                            10
-                        ),
+                        password: bcrypt.hashSync(String(user.id), 10),
                     },
                 });
 

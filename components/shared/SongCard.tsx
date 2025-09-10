@@ -1,31 +1,54 @@
 "use client";
 
-import React from "react";
+import React, { useCallback } from "react";
 import { FaPause, FaPlay } from "react-icons/fa6";
 import { motion } from "framer-motion";
-import { usePlayerStore } from "@/store/use-player-store";
-import { Song } from "@prisma/client";
+import { SongFull, usePlayerStore } from "@/store/use-player-store";
 import { cn } from "@/lib/utils";
+import { useShallow } from "zustand/react/shallow";
 
 interface Props {
-    song: Song;
-    songTitle: string;
-    authorName: string;
-    albumCoverUrl: string;
+    onPlayClick: () => void;
+    song: SongFull;
 }
 
-export default function SongCard({
-    song,
-    albumCoverUrl,
-    authorName,
-    songTitle,
-}: Props) {
-    const { isPaused, setSong, currentSong, setIsPaused, setEnded } = usePlayerStore();
+export function SongCard({ song, onPlayClick }: Props) {
+    const [isPaused, currentSong, setSong, setIsPaused, setEnded] =
+        usePlayerStore(
+            useShallow((state) => [
+                state.isPaused,
+                state.currentSong,
+                state.setSong,
+                state.setIsPaused,
+                state.setEnded,
+            ])
+        );
+
+    const { id, imageUrl, title, authorName } = song;
+
+    const handleClick = useCallback(() => {
+        if (currentSong?.id !== id) {
+            setSong(song);
+            onPlayClick();
+        } else {
+            setIsPaused(!isPaused);
+            setEnded(false);
+        }
+    }, [
+        id,
+        currentSong,
+        setSong,
+        song,
+        onPlayClick,
+        setIsPaused,
+        isPaused,
+        setEnded,
+    ]);
 
     return (
         <div className="group flex flex-col items-stretch gap-3 text-sm cursor-default bg-card-accent rounded-sm p-2 pb-4 w-full h-full">
             <div className="relative aspect-square rounded-sm overflow-hidden flex-none w-full bg-typography-gray/5">
-                {!isPaused && currentSong?.id === song.id && (
+                {!isPaused && currentSong?.id === id && (
                     <motion.div
                         animate={{ scale: [1, 1.8, 1] }}
                         transition={{
@@ -37,25 +60,18 @@ export default function SongCard({
                     ></motion.div>
                 )}
                 <img
-                    src={albumCoverUrl}
+                    src={imageUrl}
                     alt="Album cover"
                     className="object-cover select-none h-full w-full"
                 />
                 <div
                     className={cn(
-                        "transition-all duration-200 group-hover:opacity-100 opacity-0 absolute h-full w-full top-1/2 left-1/2 -translate-1/2 z-10 flex items-center justify-center bg-black/35",
-                        isPaused && currentSong?.id === song.id && "opacity-100"
+                        "transition-all duration-200 group-hover:opacity-100 opacity-0 absolute h-full w-full top-1/2 left-1/2 -translate-1/2 flex items-center justify-center bg-black/35",
+                        isPaused && currentSong?.id === id && "opacity-100"
                     )}
                 >
                     <motion.div
-                        onClick={() => {
-                            if (currentSong?.id !== song.id) {
-                                setSong(song);
-                            } else {
-                                setIsPaused(!isPaused);
-                                setEnded(false)
-                            }
-                        }}
+                        onClick={handleClick}
                         whileTap={{
                             scale: 0.99,
                         }}
@@ -64,10 +80,10 @@ export default function SongCard({
                         }}
                         className={cn(
                             "cursor-pointer transition-[top] duration-200 group-hover:top-1/2 absolute top-[calc(50%+8px)] left-1/2 -translate-y-1/2 -translate-x-1/2 h-12 w-12 rounded-full bg-btn-primary text-background flex items-center justify-center text-base",
-                            isPaused && currentSong?.id === song.id && "top-1/2"
+                            isPaused && currentSong?.id === id && "top-1/2"
                         )}
                     >
-                        {!isPaused && currentSong?.id === song.id ? (
+                        {!isPaused && currentSong?.id === id ? (
                             <FaPause size={20} />
                         ) : (
                             <FaPlay className="ml-0.5" size={20} />
@@ -76,7 +92,7 @@ export default function SongCard({
                 </div>
             </div>
             <div className="flex flex-col gap-1 text-base flex-1">
-                <h2 className="h-full">{songTitle}</h2>
+                <h2 className="h-full">{title}</h2>
                 <p className="font-normal text-typography-gray">
                     By {authorName}
                 </p>
@@ -84,3 +100,5 @@ export default function SongCard({
         </div>
     );
 }
+
+export default React.memo(SongCard);

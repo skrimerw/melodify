@@ -1,14 +1,21 @@
-import { Song } from "@prisma/client";
+import { Prisma, Song } from "@prisma/client";
 import { create } from "zustand";
 
+export type SongFull = Prisma.SongGetPayload<{
+    include: {
+        usersLiked: true;
+    };
+}>;
+
 interface PlayerState {
-    currentSong: Song | null;
-    songs: Song[];
+    currentSong: SongFull | null;
+    songs: SongFull[];
     isPaused: boolean;
     ended: boolean;
     setEnded: (val: boolean) => void;
     setIsPaused: (val: boolean) => void;
-    setSong: (song: Song) => void;
+    setSong: (song: SongFull) => void;
+    setSongs: (songs: SongFull[]) => void;
     next: () => void;
     prev: () => void;
 }
@@ -26,6 +33,7 @@ export const usePlayerStore = create<PlayerState>()((set) => ({
                 currentSong: song,
             };
         }),
+    setSongs: (songs) => set(() => ({ songs })),
     next: () =>
         set((state) => {
             if (state.currentSong) {
@@ -33,7 +41,11 @@ export const usePlayerStore = create<PlayerState>()((set) => ({
                     (song) => song.id === state.currentSong?.id
                 );
 
-                return { currentSong: state.songs.at(index + 1) };
+                return {
+                    currentSong: state.songs.at(index + 1) || state.songs.at(0),
+                    ended:false,
+                    isPaused: false
+                };
             }
 
             return {};
@@ -45,7 +57,10 @@ export const usePlayerStore = create<PlayerState>()((set) => ({
                     (song) => song.id === state.currentSong?.id
                 );
 
-                return { currentSong: state.songs.at(index - 1) };
+                return {
+                    currentSong:
+                        state.songs.at(index - 1) || state.songs.at(-1),
+                };
             }
 
             return {};

@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { VolumeSlider } from ".";
 import { cn } from "@/lib/utils";
 import { usePlayerStore } from "@/store/use-player-store";
+import next from "next";
 
 interface Props {
     audioRef: HTMLAudioElement | null;
@@ -12,8 +13,9 @@ interface Props {
 
 export default function ProgressBar({ audioRef, className }: Props) {
     const [currentTiming, setCurrentTiming] = useState(0);
+    const [buffered, setBuffered] = useState(0);
     const isChanging = useRef(false);
-    const { setIsPaused, setEnded, ended } = usePlayerStore();
+    const { setIsPaused, setEnded, ended, next } = usePlayerStore();
 
     useEffect(() => {
         audioRef?.addEventListener("timeupdate", onTimeUpdate);
@@ -26,6 +28,12 @@ export default function ProgressBar({ audioRef, className }: Props) {
     }, []);
 
     function onTimeUpdate() {
+        if (audioRef && audioRef.buffered.length - 1 === 0) {
+            setBuffered(
+                audioRef.buffered.end(audioRef.buffered.length - 1) /
+                    audioRef.duration
+            );
+        }
         if (!isChanging.current) {
             setCurrentTiming(audioRef?.currentTime || 0);
         }
@@ -34,6 +42,7 @@ export default function ProgressBar({ audioRef, className }: Props) {
     function onEnded() {
         setEnded(true);
         setIsPaused(true);
+        next();
     }
 
     function formatToMinutes(seconds: number) {
@@ -71,23 +80,33 @@ export default function ProgressBar({ audioRef, className }: Props) {
                         formatToMinutes(audioRef?.duration as number)}
                 </span>
             </div>
-            <VolumeSlider
-                value={[currentTiming]}
-                onValueChange={(val) => onValueChange(val)}
-                onValueCommit={(val) => {
-                    if (audioRef) {
-                        isChanging.current = false;
-                        audioRef.currentTime = val[0];
+            <div className="relative">
+                <VolumeSlider
+                    value={[currentTiming]}
+                    onValueChange={(val) => onValueChange(val)}
+                    onValueCommit={(val) => {
+                        if (audioRef) {
+                            isChanging.current = false;
+                            audioRef.currentTime = val[0];
 
-                        if (ended) {
-                            setEnded(false);
-                            setIsPaused(false);
+                            if (ended) {
+                                setEnded(false);
+                                setIsPaused(false);
+                            }
                         }
-                    }
-                }}
-                step={0.001}
-                max={audioRef?.duration}
-            />
+                    }}
+                    step={0.001}
+                    max={audioRef?.duration}
+                />
+                <div className="absolute top-1 left-0 right-0 w-full z-0 pointer-events-none">
+                    <span
+                        className={`block h-1 rounded-full bg-white/20`}
+                        style={{
+                            width: buffered*100+"%"
+                        }}
+                    ></span>
+                </div>
+            </div>
         </div>
     );
 }

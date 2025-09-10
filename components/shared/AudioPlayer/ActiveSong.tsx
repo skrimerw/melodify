@@ -1,15 +1,73 @@
 "use client";
 
+import { likeSong, unlikeSong } from "@/actions/song-likes";
 import { usePlayerStore } from "@/store/use-player-store";
-import React, { useState } from "react";
+import { useSession } from "next-auth/react";
+import React from "react";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
 export default function ActiveSong() {
-    const [isFavorite, setIsFavorite] = useState(false);
-    const song = usePlayerStore((state) => state.currentSong);
+    const { currentSong: song, setSong, setSongs, songs } = usePlayerStore();
+    const { data } = useSession();
+    function getIsLiked() {
+        return song?.usersLiked !== undefined && song.usersLiked.length > 0;
+    }
 
     function handleToggleFavourite() {
-        setIsFavorite((prev) => !prev);
+        const isLiked = getIsLiked();
+
+        if (!song) return;
+
+        if (isLiked) {
+            unlikeSong(song.id);
+            setSong({ ...song, usersLiked: [] });
+            setSongs(
+                songs.map((songItem) => {
+                    if (songItem.id === song.id) {
+                        return {
+                            ...songItem,
+                            usersLiked: [],
+                        };
+                    }
+
+                    return songItem;
+                })
+            );
+        } else {
+            likeSong(song.id);
+            setSong({
+                ...song,
+                usersLiked: [
+                    {
+                        songId: song.id,
+                        userId: 1,
+                        id: -1,
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
+                    },
+                ],
+            });
+            setSongs(
+                songs.map((songItem) => {
+                    if (songItem.id === song.id) {
+                        return {
+                            ...songItem,
+                            usersLiked: [
+                                {
+                                    songId: song.id,
+                                    userId: 1,
+                                    id: -1,
+                                    createdAt: new Date(),
+                                    updatedAt: new Date(),
+                                },
+                            ],
+                        };
+                    }
+
+                    return songItem;
+                })
+            );
+        }
     }
 
     return (
@@ -23,18 +81,22 @@ export default function ActiveSong() {
             </div>
             <div className="flex flex-col gap-1">
                 <h2>{song?.title}</h2>
-                <p className="font-normal text-typography-gray">By {song?.authorName}</p>
+                <p className="font-normal text-typography-gray">
+                    By {song?.authorName}
+                </p>
             </div>
-            <button
-                className="text-xl cursor-pointer"
-                onClick={handleToggleFavourite}
-            >
-                {isFavorite ? (
-                    <IoHeart className="text-btn-primary" />
-                ) : (
-                    <IoHeartOutline />
-                )}
-            </button>
+            {data?.user && (
+                <button
+                    className="text-xl cursor-pointer"
+                    onClick={handleToggleFavourite}
+                >
+                    {getIsLiked() ? (
+                        <IoHeart className="text-btn-primary" />
+                    ) : (
+                        <IoHeartOutline />
+                    )}
+                </button>
+            )}
         </div>
     );
 }
