@@ -6,10 +6,9 @@ import path from "path";
 
 export async function POST() {
     const htmlTemplate = fs.readFileSync(
-        path.join(process.cwd(), "/email-templates/verification.handlebars"),
+        path.join(process.cwd(), "email-templates/verification.hbs"),
         "utf8"
     );
-
 
     const template = Handlebars.compile(htmlTemplate);
 
