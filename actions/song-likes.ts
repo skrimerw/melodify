@@ -3,7 +3,7 @@
 import { auth } from "@/auth";
 import { prisma } from "@/prisma/prisma-client";
 
-export async function likeSong(songId: number) {
+export async function addLike(songId: number) {
     const session = await auth();
 
     if (!session?.user) return;
@@ -32,7 +32,7 @@ export async function likeSong(songId: number) {
     }
 }
 
-export async function unlikeSong(songId: number) {
+export async function removeLike(songId: number) {
     const session = await auth();
 
     if (!session?.user) return;

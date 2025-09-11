@@ -20,7 +20,7 @@ model User {
     isVerified Boolean @default(false)
 
     verificationCode VerificationCode?
-    likedSongs       LikedSongs[]
+    likedSongs       LikedSong[]
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -49,13 +49,13 @@ model Song {
     audioUrl String
     imageUrl String
 
-    usersLiked LikedSongs[]
+    usersLiked LikedSong[]
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
 
-model LikedSongs {
+model LikedSong {
     id Int @id @default(autoincrement())
 
     song   Song @relation(fields: [songId], references: [id])

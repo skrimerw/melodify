@@ -18,26 +18,30 @@ import FormProfile from "./FormProfile";
 import VerificationCode from "./VerificationCode";
 import VerificationDialog from "./VerificationDialog";
 import NewestSongsContainer from "./NewestSongsContainer";
+import PlaylistSongsItem from "./PlaylistSongsItem";
+import LikeBtn from "./LikeBtn";
 
 export {
-    Sidebar,
-    Navigation,
-    NavLink,
-    BoxWrapper,
-    Library,
-    LibraryItem,
-    FavoriteLink,
-    Header,
-    HeaderContent,
-    SongCard,
-    LogoutBtn,
-    Logo,
-    SignInForm,
-    SignUpForm,
-    HistoryBack,
-    HistoryForward,
-    FormProfile,
-    VerificationCode,
-    VerificationDialog,
-    NewestSongsContainer
+  Sidebar,
+  Navigation,
+  NavLink,
+  BoxWrapper,
+  Library,
+  LibraryItem,
+  FavoriteLink,
+  Header,
+  HeaderContent,
+  SongCard,
+  LogoutBtn,
+  Logo,
+  SignInForm,
+  SignUpForm,
+  HistoryBack,
+  HistoryForward,
+  FormProfile,
+  VerificationCode,
+  VerificationDialog,
+  NewestSongsContainer,
+  PlaylistSongsItem,
+  LikeBtn,
 };
