@@ -6,6 +6,7 @@ import {
     Sidebar,
 } from "@/components/shared";
 import { AudioPlayer } from "@/components/shared/AudioPlayer";
+import { AudioPlayerProvider } from "@/context/useAudioPlayer";
 import React from "react";
 
 export default function Layout({
@@ -14,6 +15,8 @@ export default function Layout({
     children: React.ReactNode;
 }>) {
     return (
+        <AudioPlayerProvider>
+
         <main className="main-layout h-screen p-3 overflow-y-hidden">
             <Sidebar className="w-[300px] overflow-hidden">
                 <Navigation />
@@ -28,5 +31,6 @@ export default function Layout({
             </section>
             <AudioPlayer className="col-span-2 h-[94px]" />
         </main>
+        </AudioPlayerProvider>
     );
 }

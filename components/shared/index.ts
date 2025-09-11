@@ -20,6 +20,7 @@ import VerificationDialog from "./VerificationDialog";
 import NewestSongsContainer from "./NewestSongsContainer";
 import PlaylistSongsItem from "./PlaylistSongsItem";
 import LikeBtn from "./LikeBtn";
+import PlaylistContext from "./PlaylistContext";
 
 export {
   Sidebar,
@@ -44,4 +45,5 @@ export {
   NewestSongsContainer,
   PlaylistSongsItem,
   LikeBtn,
+  PlaylistContext
 };

@@ -1,49 +1,32 @@
 "use client";
 
-import React, { useCallback } from "react";
+import React from "react";
 import { FaPause, FaPlay } from "react-icons/fa6";
 import { motion } from "framer-motion";
-import { SongFull, usePlayerStore } from "@/store/use-player-store";
 import { cn } from "@/lib/utils";
-import { useShallow } from "zustand/react/shallow";
+import { Song, useAudioPlayer } from "@/context/useAudioPlayer";
 
 interface Props {
     onPlayClick: () => void;
-    song: SongFull;
+    song: Song;
 }
 
 export function SongCard({ song, onPlayClick }: Props) {
-    const [isPaused, currentSong, setSong, setIsPaused, setEnded] =
-        usePlayerStore(
-            useShallow((state) => [
-                state.isPaused,
-                state.currentSong,
-                state.setSong,
-                state.setIsPaused,
-                state.setEnded,
-            ])
-        );
-
+    const { pause, play, isPaused, currentSong } = useAudioPlayer();
     const { id, imageUrl, title, authorName } = song;
 
-    const handleClick = useCallback(() => {
+    const handleClick = () => {
         if (currentSong?.id !== id) {
-            setSong(song);
+            play(song);
             onPlayClick();
         } else {
-            setIsPaused(!isPaused);
-            setEnded(false);
+            if (isPaused) {
+                play();
+            } else {
+                pause();
+            }
         }
-    }, [
-        id,
-        currentSong,
-        setSong,
-        song,
-        onPlayClick,
-        setIsPaused,
-        isPaused,
-        setEnded,
-    ]);
+    };
 
     return (
         <div className="group flex flex-col items-stretch gap-3 text-sm cursor-default bg-card-accent rounded-sm p-2 pb-4 w-full h-full">
