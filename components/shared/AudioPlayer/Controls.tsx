@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { FaPause, FaPlay } from "react-icons/fa6";
 import { IoPlaySkipBackSharp, IoPlaySkipForwardSharp } from "react-icons/io5";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { usePlayerStore } from "@/store/use-player-store";
+import { useAudioPlayer } from "@/context/useAudioPlayer";
 
 interface Props {
     className?: string;
@@ -15,17 +15,18 @@ export default function Controls({ className }: Props) {
     const {
         currentSong: song,
         isPaused,
-        setIsPaused,
+        pause,
+        play,
         next,
         prev,
-    } = usePlayerStore();
-
-    useEffect(() => {
-        setIsPaused(false);
-    }, [song?.id]);
+    } = useAudioPlayer();
 
     function handlePause() {
-        setIsPaused(!isPaused);
+        if (isPaused) {
+            play()
+        } else {
+            pause()
+        }
     }
 
     return (

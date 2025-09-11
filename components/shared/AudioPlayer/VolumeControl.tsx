@@ -1,30 +1,21 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FaVolumeHigh } from "react-icons/fa6";
 import { VolumeSlider } from ".";
 import { GenIcon } from "react-icons";
 import { cn } from "@/lib/utils";
+import { useAudioPlayer } from "@/context/useAudioPlayer";
 
 interface Props {
-    audioRef: HTMLAudioElement | null;
     className?: string;
 }
 
-export default function VolumeControl({ audioRef, className }: Props) {
-    const [volume, setVolume] = useState([0.5]);
-
-    useEffect(() => {
-        if (audioRef) {
-            audioRef.volume = volume[0];
-        }
-    }, []);
+export default function VolumeControl({ className }: Props) {
+    const { volume, setVolume } = useAudioPlayer();
 
     function onVolumeChange(value: number[]) {
-        if (audioRef) {
-            audioRef.volume = value[0];
-            setVolume(value);
-        }
+        setVolume(value[0]);
     }
 
     function FaVolumeMedium(props: any) {
@@ -76,7 +67,7 @@ export default function VolumeControl({ audioRef, className }: Props) {
     }
 
     function getVolumeIcon() {
-        const volumeVal = volume[0];
+        const volumeVal = volume;
 
         if (volumeVal >= 0.66) {
             return <FaVolumeHigh />;
@@ -94,14 +85,16 @@ export default function VolumeControl({ audioRef, className }: Props) {
             <div className="absolute bottom-7.5 -right-1 rounded-full p-3 border border-input bg-card invisible opacity-0 transition-all duration-300 delay-150 group-hover:visible group-hover:opacity-100 group-focus:visible group-focus:opacity-100">
                 <VolumeSlider
                     onValueChange={(value) => onVolumeChange(value)}
-                    defaultValue={volume}
+                    defaultValue={[volume]}
                     max={1}
                     step={0.01}
                     orientation="vertical"
                     className={cn("w-10 !h-[50px]")}
                 />
             </div>
-            <div className="relative text-[27px] h-5.5 text-typography-gray cursor-pointer group-hover:text-primary group-focus:text-primary mb-1">{getVolumeIcon()}</div>
+            <div className="relative text-[27px] h-5.5 text-typography-gray cursor-pointer group-hover:text-primary group-focus:text-primary mb-1">
+                {getVolumeIcon()}
+            </div>
         </div>
     );
 }

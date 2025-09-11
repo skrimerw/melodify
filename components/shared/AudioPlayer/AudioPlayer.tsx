@@ -1,23 +1,22 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ActiveSong from "./ActiveSong";
 import Controls from "./Controls";
 import VolumeControl from "./VolumeControl";
 import ProgressBar from "./ProgressBar";
-import { usePlayerStore } from "@/store/use-player-store";
 import { motion, AnimatePresence } from "framer-motion";
 import BoxWrapper from "../BoxWrapper";
 import { FastAverageColor } from "fast-average-color";
+import { useAudioPlayer } from "@/context/useAudioPlayer";
 
 interface Props {
     className?: string;
 }
 
 export default function AudioPlayer({ className }: Props) {
-    const { currentSong: song, isPaused, ended } = usePlayerStore();
-    const audioRef = useRef<HTMLAudioElement>(null);
+    const { currentSong: song } = useAudioPlayer();
     const [avgColor, setAvgColor] = useState("");
 
     async function getAvgColor() {
@@ -34,21 +33,8 @@ export default function AudioPlayer({ className }: Props) {
         getAvgColor();
     }, [song?.id]);
 
-    useEffect(() => {
-        if (audioRef.current && song) {
-            if (audioRef.current.paused && !ended) {
-                audioRef.current.play();
-            } else if (!isPaused && ended) {
-                audioRef.current.play();
-            } else if (isPaused || ended) {
-                audioRef.current.pause();
-            }
-        }
-    }, [isPaused, ended]);
-
     return (
         <>
-            <audio ref={audioRef} src={song?.audioUrl} autoPlay></audio>
             <AnimatePresence initial={false}>
                 {song && (
                     <motion.div
@@ -66,7 +52,7 @@ export default function AudioPlayer({ className }: Props) {
                             className
                         )}
                     >
-                        <ProgressBar audioRef={audioRef.current} />
+                        <ProgressBar />
                         <BoxWrapper
                             className={cn("p-2 pr-6 transition-colors")}
                             style={{
@@ -76,7 +62,7 @@ export default function AudioPlayer({ className }: Props) {
                             <div className="flex justify-between items-center">
                                 <ActiveSong />
                                 <Controls className="absolute left-1/2 -translate-x-1/2" />
-                                <VolumeControl audioRef={audioRef.current} />
+                                <VolumeControl />
                             </div>
                         </BoxWrapper>
                     </motion.div>

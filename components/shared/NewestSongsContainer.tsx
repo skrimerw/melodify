@@ -1,18 +1,18 @@
 "use client";
 
-import React, { useCallback } from "react";
+import React from "react";
 import SongCard from "./SongCard";
 import { cn } from "@/lib/utils";
-import { SongFull, usePlayerStore } from "@/store/use-player-store";
+import { Song, useAudioPlayer } from "@/context/useAudioPlayer";
 
 interface Props {
-    songs: SongFull[];
+    songs: Song[];
     className?: string;
 }
 
 export default function NewestSongsContainer({ songs, className }: Props) {
-    const setSongs = usePlayerStore(({ setSongs }) => setSongs);
-    const onPlayClick = useCallback(() => setSongs(songs), [setSongs, songs]);
+    const { setQueue } = useAudioPlayer();
+    const onPlayClick = () => setQueue(songs);
 
     return (
         <div

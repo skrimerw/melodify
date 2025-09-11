@@ -2,82 +2,38 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { VolumeSlider } from ".";
-import { cn } from "@/lib/utils";
-import { usePlayerStore } from "@/store/use-player-store";
-import next from "next";
+import { cn, formatToMinutes } from "@/lib/utils";
+import { useAudioPlayer } from "@/context/useAudioPlayer";
 
 interface Props {
-    audioRef: HTMLAudioElement | null;
     className?: string;
 }
 
-export default function ProgressBar({ audioRef, className }: Props) {
-    const [currentTiming, setCurrentTiming] = useState(0);
-    const [buffered, setBuffered] = useState(0);
+export default function ProgressBar({ className }: Props) {
+    const { duration, currentTime, seekTo } = useAudioPlayer();
+    const [currentTiming, setCurrentTiming] = useState(currentTime);
+    //const [buffered, setBuffered] = useState(0);
     const isChanging = useRef(false);
-    const { setIsPaused, setEnded, ended, next } = usePlayerStore();
 
     useEffect(() => {
-        audioRef?.addEventListener("timeupdate", onTimeUpdate);
-        audioRef?.addEventListener("ended", onEnded);
-
-        return () => {
-            audioRef?.removeEventListener("timeupdate", onTimeUpdate);
-            audioRef?.addEventListener("ended", onEnded);
-        };
-    }, []);
-
-    function onTimeUpdate() {
-        if (audioRef && audioRef.buffered.length - 1 === 0) {
-            setBuffered(
-                audioRef.buffered.end(audioRef.buffered.length - 1) /
-                    audioRef.duration
-            );
-        }
         if (!isChanging.current) {
-            setCurrentTiming(audioRef?.currentTime || 0);
+            setCurrentTiming(currentTime);
         }
-    }
-
-    function onEnded() {
-        setEnded(true);
-        setIsPaused(true);
-        next();
-    }
-
-    function formatToMinutes(seconds: number) {
-        const roundedSeconds = Math.round(seconds);
-        let minutes = String(Math.floor(roundedSeconds / 60));
-        let secondsStr = String(roundedSeconds % 60);
-
-        if (secondsStr.length === 1) {
-            secondsStr = "0" + secondsStr;
-        }
-
-        if (minutes.length === 1) {
-            minutes = "0" + minutes;
-        }
-
-        return `${minutes}:${secondsStr}`;
-    }
+    }, [currentTime]);
 
     function onValueChange(val: number[]) {
         isChanging.current = true;
-        if (audioRef) {
-            setCurrentTiming(val[0]);
-        }
+        setCurrentTiming(val[0]);
     }
 
     return (
         <div className={cn(className)}>
             <div className="flex justify-between text-sm">
                 <span className="h-5">
-                    {!isNaN(audioRef?.duration as number) &&
-                        formatToMinutes(currentTiming)}
+                    {!isNaN(duration) && formatToMinutes(currentTiming)}
                 </span>
                 <span className="h-5">
-                    {!isNaN(audioRef?.duration as number) &&
-                        formatToMinutes(audioRef?.duration as number)}
+                    {!isNaN(duration) && formatToMinutes(duration)}
                 </span>
             </div>
             <div className="relative">
@@ -85,27 +41,20 @@ export default function ProgressBar({ audioRef, className }: Props) {
                     value={[currentTiming]}
                     onValueChange={(val) => onValueChange(val)}
                     onValueCommit={(val) => {
-                        if (audioRef) {
-                            isChanging.current = false;
-                            audioRef.currentTime = val[0];
-
-                            if (ended) {
-                                setEnded(false);
-                                setIsPaused(false);
-                            }
-                        }
+                        isChanging.current = false;
+                        seekTo(val[0]);
                     }}
                     step={0.001}
-                    max={audioRef?.duration}
+                    max={duration}
                 />
-                <div className="absolute top-1 left-0 right-0 w-full z-0 pointer-events-none">
+                {/* <div className="absolute top-1 left-0 right-0 w-full z-0 pointer-events-none">
                     <span
                         className={`block h-1 rounded-full bg-white/20`}
                         style={{
-                            width: buffered*100+"%"
+                            width: buffered * 100 + "%",
                         }}
                     ></span>
-                </div>
+                </div> */}
             </div>
         </div>
     );
