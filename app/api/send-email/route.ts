@@ -6,7 +6,7 @@ import path from "path";
 
 export async function POST() {
     const htmlTemplate = fs.readFileSync(
-        "./email-templates/verification.hbs",
+        path.join(process.cwd(), "./public/email-templates/verification.hbs"),
         "utf8"
     );
 
