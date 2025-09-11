@@ -19,15 +19,7 @@ export default function PlaylistSongsItem({
     className,
     onPlayClick,
 }: Props) {
-    const {
-        isPaused,
-        currentSong,
-        play,
-        pause,
-        setQueue,
-        queue,
-        setCurrentSong,
-    } = useAudioPlayer();
+    const { isPaused, currentSong, play, pause } = useAudioPlayer();
     const { id, title, imageUrl, authorName } = song;
 
     const handleClick = () => {
@@ -42,69 +34,6 @@ export default function PlaylistSongsItem({
             }
         }
     };
-
-    function getIsLiked() {
-        return song?.usersLiked !== undefined && song.usersLiked.length > 0;
-    }
-
-    function onLikeRemove() {
-        const isLiked = getIsLiked();
-
-        if (!song) return;
-
-        if (isLiked) {
-            play();
-            setQueue(
-                queue.map((songItem) => {
-                    if (songItem.id === song.id) {
-                        return {
-                            ...songItem,
-                            usersLiked: [],
-                        };
-                    }
-
-                    return songItem;
-                })
-            );
-        }
-    }
-
-    function onLikeAdd() {
-        if (!song) return;
-
-        setCurrentSong({
-            ...song,
-            usersLiked: [
-                {
-                    songId: song.id,
-                    userId: 1,
-                    id: -1,
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                },
-            ],
-        });
-        setQueue(
-            queue.map((songItem) => {
-                if (songItem.id === song.id) {
-                    return {
-                        ...songItem,
-                        usersLiked: [
-                            {
-                                songId: song.id,
-                                userId: 1,
-                                id: -1,
-                                createdAt: new Date(),
-                                updatedAt: new Date(),
-                            },
-                        ],
-                    };
-                }
-
-                return songItem;
-            })
-        );
-    }
 
     return (
         <div className={cn("group flex justify-between", className)}>
@@ -158,7 +87,7 @@ export default function PlaylistSongsItem({
                     <p className="text-typography-gray">By {authorName}</p>
                 </div>
             </div>
-            <LikeBtn songId={id} onLikeAdd={onLikeAdd} onLikeRemove={onLikeRemove} initiallyLiked={getIsLiked()} />
+            <LikeBtn song={song} />
         </div>
     );
 }

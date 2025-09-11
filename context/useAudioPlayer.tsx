@@ -1,6 +1,7 @@
 "use client";
 
 import { Prisma } from "@prisma/client";
+import { usePathname } from "next/navigation";
 import {
     createContext,
     useCallback,
@@ -84,6 +85,20 @@ export function AudioPlayerProvider({
         if (!audioRef.current) {
             audioRef.current = new Audio();
         }
+
+        return () => {
+            setState((prev) => ({
+                currentSong: null,
+                isEnded: false,
+                isPaused: false,
+                queue: [],
+                volume: 0.5,
+                currentTime: 0,
+                duration: 0,
+            }));
+
+            audioRef?.current?.pause();
+        };
     }, []);
 
     useEffect(() => {

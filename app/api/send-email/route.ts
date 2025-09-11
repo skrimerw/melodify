@@ -10,6 +10,7 @@ export async function POST() {
         "utf8"
     );
 
+
     const template = Handlebars.compile(htmlTemplate);
 
     const resultHtml = template({ code: "123456" });
