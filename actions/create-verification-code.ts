@@ -38,7 +38,7 @@ export default async function createVerificationCode(
     });
 
     const htmlTemplate = fs.readFileSync(
-        path.join(process.cwd(), "email-templates/verification.hbs"),
+        "./public/email-templates/verification.hbs",
         "utf8"
     );
 
