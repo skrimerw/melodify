@@ -1,39 +1,37 @@
 "use client";
 
 import { addLike, removeLike } from "@/actions/song-likes";
+import { useLikedSongsStore } from "@/store/use-liked-songs-store";
+import { Song } from "@prisma/client";
 import React, { useEffect, useState } from "react";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
 interface Props {
-    songId: number;
-    initiallyLiked: boolean;
-    onLikeAdd?: () => void;
-    onLikeRemove?: () => void;
+    song: Song;
 }
 
-export default function LikeBtn({
-    onLikeAdd,
-    onLikeRemove,
-    songId,
-    initiallyLiked,
-}: Props) {
+export default function LikeBtn({ song }: Props) {
+    const initiallyLiked = useLikedSongsStore(
+        (state) => state.likedSongs.find((s) => s.id === song.id) !== undefined
+    );
+    const setLikedSongs = useLikedSongsStore((state) => state.setLikedSongs);
+    const likedSongs = useLikedSongsStore((state) => state.likedSongs);
+
     const [liked, setLiked] = useState(initiallyLiked);
 
     useEffect(() => {
-        setLiked(initiallyLiked);
-    }, [initiallyLiked]);
-
-    
+        setLiked(initiallyLiked)
+    }, [initiallyLiked])
 
     function handleToggleFavourite() {
         if (liked) {
-            removeLike(songId);
+            removeLike(song.id);
             setLiked(false);
-            onLikeRemove?.();
+            setLikedSongs(likedSongs.filter((s) => s.id !== song.id));
         } else {
-            addLike(songId);
+            addLike(song.id);
             setLiked(true);
-            onLikeAdd?.();
+            setLikedSongs([...likedSongs, song]);
         }
     }
 

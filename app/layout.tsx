@@ -17,20 +17,20 @@ export default function RootLayout({
         <html lang="en">
             <body className={`${geistSans.variable} antialiased dark grid`}>
                 <SessionProvider>
-                    <Toaster
-                        toastOptions={{
-                            style: {
-                                backgroundColor: "var(--card)",
-                                color: "var(--foreground)",
-                            },
-                            iconTheme: {
-                                primary: "",
-                                secondary: "var(--card)",
-                            },
-                            duration: 2000
-                        }}
-                    />
-                    {children}
+                        <Toaster
+                            toastOptions={{
+                                style: {
+                                    backgroundColor: "var(--card)",
+                                    color: "var(--foreground)",
+                                },
+                                iconTheme: {
+                                    primary: "",
+                                    secondary: "var(--card)",
+                                },
+                                duration: 2000,
+                            }}
+                        />
+                        {children}
                 </SessionProvider>
             </body>
         </html>

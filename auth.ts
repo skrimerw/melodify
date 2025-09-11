@@ -67,6 +67,8 @@ export const { handlers, signIn, signOut, auth, unstable_update } = NextAuth({
             },
         }),
     ],
+    trustHost: true,
+    useSecureCookies: false,
     session: {
         strategy: "jwt",
     },
