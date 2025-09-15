@@ -1,6 +1,8 @@
+import { getSongDuration } from "../lib/utils";
 import { Prisma } from "@prisma/client";
+import path from "path";
 
-export const songs: Prisma.SongCreateInput[] = [
+const songsInitial: Omit<Prisma.SongCreateInput, "duration">[] = [
     {
         title: "Фраер",
         authorName: "Михаил Круг",
@@ -32,3 +34,8 @@ export const songs: Prisma.SongCreateInput[] = [
         imageUrl: "./images/pure-mccartney.jpg",
     },
 ];
+
+export const songs = songsInitial.map(async (song) => ({
+    ...song,
+    duration: await getSongDuration(path.join("./public", song.audioUrl)),
+}));

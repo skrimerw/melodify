@@ -3,34 +3,28 @@
 import React from "react";
 import PlaylistSongsItem from "./PlaylistSongsItem";
 import { cn } from "@/lib/utils";
-import { Song, useAudioPlayer } from "@/context/useAudioPlayer";
-import { useLikedSongsStore } from "@/store/use-liked-songs-store";
-import { Music } from "lucide-react";
+import { Song } from "@prisma/client";
+import PlaylistLoadingSkeleton from "./PlaylistLoadingSkeleton";
+import { useAudioPlayer } from "@/store/use-audio-player";
 
 interface Props {
+    songs: Song[];
+    loading?: boolean;
     className?: string;
 }
 
-export default function PlaylistContext({ className }: Props) {
-    const songs = useLikedSongsStore((state) => state.likedSongs);
-    const { setQueue } = useAudioPlayer();
-    const onPlayClick = () => setQueue(songs as any);
+export default function PlaylistContext({ songs, loading, className }: Props) {
+    const setQueue = useAudioPlayer((state) => state.setQueue);
+    const onPlayClick = () => setQueue(songs);
 
     return (
         <div className={cn("flex flex-col gap-4", className)}>
-            <div className="text-typography-gray flex flex-col items-center my-auto">
-                <Music
-                    className="text-typography-gray opacity-40"
-                    size={150}
-                    strokeWidth={1.2}
-                />
-                <p className="opacity-50 text-xl">No songs yet</p>
-            </div>
+            {loading && <PlaylistLoadingSkeleton length={5} />}
             {songs.map((song) => {
                 return (
                     <PlaylistSongsItem
                         key={song.id}
-                        song={song as any}
+                        song={song}
                         onPlayClick={onPlayClick}
                     />
                 );

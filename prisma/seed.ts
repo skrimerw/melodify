@@ -1,4 +1,4 @@
-import { songs } from "./constants";
+import { songs } from "./constant";
 import { prisma } from "./prisma-client";
 import bcrypt from "bcrypt";
 
@@ -12,15 +12,19 @@ async function up() {
             },
         ],
     });
-
-    await prisma.song.createMany({
-        data: songs,
+    
+    songs.forEach(async (song) => {
+        await prisma.song.create({
+            data: await song,
+        });
     });
 }
 
 async function down() {
     await prisma.$executeRaw`TRUNCATE TABLE "User" RESTART IDENTITY CASCADE`;
+    await prisma.$executeRaw`TRUNCATE TABLE "VerificationCode" RESTART IDENTITY CASCADE`;
     await prisma.$executeRaw`TRUNCATE TABLE "Song" RESTART IDENTITY CASCADE`;
+    await prisma.$executeRaw`TRUNCATE TABLE "LikedSong" RESTART IDENTITY CASCADE`;
 }
 
 async function main() {

@@ -1,6 +1,6 @@
 "use client";
 
-import { Prisma } from "@prisma/client";
+import { Prisma, Song } from "@prisma/client";
 import { usePathname } from "next/navigation";
 import {
     createContext,
@@ -11,11 +11,11 @@ import {
     useState,
 } from "react";
 
-export type Song = Prisma.SongGetPayload<{
+/* export type Song = Prisma.SongGetPayload<{
     include: {
         usersLiked: true;
     };
-}>;
+}>; */
 
 type AudioPlayerState = {
     isPaused: boolean;
