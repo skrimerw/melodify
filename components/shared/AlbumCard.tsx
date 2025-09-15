@@ -5,37 +5,46 @@ import { FaPause, FaPlay } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useAudioPlayer } from "@/store/use-audio-player";
-import { SongWithAlbumAndArtist } from "@/types";
+import { Song } from "@prisma/client";
 import Link from "next/link";
 
 interface Props {
-    onPlayClick: () => void;
-    song: SongWithAlbumAndArtist;
+    songs: Song[];
+    imageUrl: string;
+    title: string;
+    artistName: string;
+    artistId: number;
+    releaseYear: number;
 }
 
-export function SongCard({ song, onPlayClick }: Props) {
+export function AlbumCard({
+    songs,
+    imageUrl,
+    title,
+    artistName,
+    artistId,
+    releaseYear
+}: Props) {
     const isPaused = useAudioPlayer((state) => state.isPaused);
     const currentSong = useAudioPlayer((state) => state.currentSong);
     const play = useAudioPlayer((state) => state.play);
     const pause = useAudioPlayer((state) => state.pause);
-    const {
+    /* const {
         id,
-        album: { imageUrl },
         title,
-        artist: { id: artistId, name },
-    } = song;
+        artist: { name },
+    } = songs; */
 
     const handleClick = () => {
-        if (currentSong?.id !== id) {
-            play(song);
-            onPlayClick();
+        /* if (currentSong?.id !== id) {
+           // play(song);
         } else {
             if (isPaused) {
                 play();
             } else {
                 pause();
             }
-        }
+        } */
     };
 
     return (
@@ -59,8 +68,8 @@ export function SongCard({ song, onPlayClick }: Props) {
                 />
                 <div
                     className={cn(
-                        "transition-all duration-200 group-hover:opacity-100 opacity-0 absolute h-[calc(100%+10px)] w-[calc(100%+10px)] top-1/2 left-1/2 -translate-1/2 flex items-center justify-center bg-black/35",
-                        isPaused && currentSong?.id === id && "opacity-100"
+                        "transition-all duration-200 group-hover:opacity-100 opacity-0 absolute h-[calc(100%+10px)] w-[calc(100%+10px)] top-1/2 left-1/2 -translate-1/2 flex items-center justify-center bg-black/35"
+                        /* isPaused && currentSong?.id === id && "opacity-100" */
                     )}
                 >
                     <motion.div
@@ -73,28 +82,29 @@ export function SongCard({ song, onPlayClick }: Props) {
                         }}
                         className={cn(
                             "cursor-pointer transition-[bottom] duration-200 group-hover:bottom-4 absolute bottom-[calc(12px)] right-4 h-12 w-12 rounded-full bg-btn-primary text-background flex items-center justify-center text-base",
-                            isPaused && currentSong?.id === id && "bottom-4"
+                            /*  isPaused && currentSong?.id === id && */ "bottom-4"
                         )}
                     >
-                        {!isPaused && currentSong?.id === id ? (
+                        {/* {!isPaused && currentSong?.id === id ? (
                             <FaPause size={20} />
                         ) : (
                             <FaPlay className="ml-0.5" size={20} />
-                        )}
+                        )} */}
                     </motion.div>
                 </div>
             </div>
             <div className="flex flex-col gap-0.5 text-base flex-1">
-                <h2 className="h-full hover:underline">{title}</h2>
+                <h2 className="h-full text-sm hover:underline">{title}</h2>
                 <Link
                     href={`/artist/${artistId}`}
                     className="text-typography-gray text-sm transition-all hover:text-primary w-fit"
                 >
-                    {name}
+                    {artistName}
                 </Link>
+                <p className="text-typography-gray text-sm">{releaseYear}</p>
             </div>
         </div>
     );
 }
 
-export default React.memo(SongCard);
+export default React.memo(AlbumCard);

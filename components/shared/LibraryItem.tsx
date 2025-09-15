@@ -39,9 +39,7 @@ export default function LibraryItem({
             </div>
             <div className="flex flex-col gap-1">
                 <h2>{songTitle}</h2>
-                <p className="font-normal text-typography-gray">
-                    By {authorName}
-                </p>
+                <p className="font-normal text-typography-gray">{authorName}</p>
             </div>
         </div>
     );

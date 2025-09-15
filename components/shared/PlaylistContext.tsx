@@ -3,12 +3,12 @@
 import React from "react";
 import PlaylistSongsItem from "./PlaylistSongsItem";
 import { cn } from "@/lib/utils";
-import { Song } from "@prisma/client";
 import PlaylistLoadingSkeleton from "./PlaylistLoadingSkeleton";
 import { useAudioPlayer } from "@/store/use-audio-player";
+import { SongWithAlbumAndArtist } from "@/types";
 
 interface Props {
-    songs: Song[];
+    songs: SongWithAlbumAndArtist[];
     loading?: boolean;
     className?: string;
 }

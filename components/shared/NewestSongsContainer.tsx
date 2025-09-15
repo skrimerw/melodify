@@ -4,15 +4,15 @@ import React from "react";
 import SongCard from "./SongCard";
 import { cn } from "@/lib/utils";
 import { useAudioPlayer } from "@/store/use-audio-player";
-import { Song } from "@prisma/client";
+import { SongWithAlbumAndArtist } from "@/types";
 
 interface Props {
-    songs: Song[];
+    songs: SongWithAlbumAndArtist[];
     className?: string;
 }
 
 export default function NewestSongsContainer({ songs, className }: Props) {
-    const setQueue = useAudioPlayer(state => state.setQueue);
+    const setQueue = useAudioPlayer((state) => state.setQueue);
     const onPlayClick = () => setQueue(songs);
 
     return (

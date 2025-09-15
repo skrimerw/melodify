@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import FormInput from "./form/FormInput";
 import { FormProvider, useForm } from "react-hook-form";
 import { Api } from "@/lib/api-client";
-import { Song } from "@prisma/client";
 import PlaylistContext from "./PlaylistContext";
+import { SongWithAlbumAndArtist } from "@/types";
 
 export default function Search() {
     const form = useForm({
@@ -14,7 +14,7 @@ export default function Search() {
         },
     });
     const searchVal = form.watch("search");
-    const [songs, setSongs] = useState<Song[]>([]);
+    const [songs, setSongs] = useState<SongWithAlbumAndArtist[]>([]);
     const [loading, setLoading] = useState(true);
 
     async function getSongs() {

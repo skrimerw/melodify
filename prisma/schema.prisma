@@ -43,11 +43,15 @@ model VerificationCode {
 model Song {
     id Int @id @default(autoincrement())
 
-    title      String
-    authorName String
-    duration   Int
-    audioUrl   String
-    imageUrl   String
+    title    String
+    duration Int
+    audioUrl String
+
+    album   Album @relation(fields: [albumId], references: [id])
+    albumId Int
+
+    artist   Artist @relation(fields: [artistId], references: [id])
+    artistId Int
 
     usersLiked LikedSong[]
 
@@ -68,4 +72,33 @@ model LikedSong {
     updatedAt DateTime @updatedAt
 
     @@unique([songId, userId])
+}
+
+model Artist {
+    id Int @id @default(autoincrement())
+
+    name         String
+    heroImageUrl String
+
+    songs  Song[]
+    albums Album[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Album {
+    id Int @id @default(autoincrement())
+
+    title       String
+    imageUrl    String
+    releaseYear Int
+
+    artist   Artist @relation(fields: [artistId], references: [id])
+    artistId Int
+
+    songs Song[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }

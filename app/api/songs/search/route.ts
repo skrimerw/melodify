@@ -23,12 +23,18 @@ export async function GET(req: NextRequest) {
                     },
                 },
                 {
-                    authorName: {
-                        contains: searchVal.toLowerCase(),
-                        mode: "insensitive",
+                    artist: {
+                        name: {
+                            contains: searchVal.toLowerCase(),
+                            mode: "insensitive",
+                        },
                     },
                 },
             ],
+        },
+        include: {
+            album: true,
+            artist: true,
         },
     });
 

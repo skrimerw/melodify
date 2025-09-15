@@ -24,6 +24,7 @@ import PlaylistContext from "./PlaylistContext";
 import StoreProvider from "./StoreProvider";
 import Search from "./Search";
 import PlaylistLoadingSkeleton from "./PlaylistLoadingSkeleton";
+import AlbumCard from "./AlbumCard";
 
 export {
     Sidebar,
@@ -52,4 +53,5 @@ export {
     StoreProvider,
     Search,
     PlaylistLoadingSkeleton,
+    AlbumCard,
 };
