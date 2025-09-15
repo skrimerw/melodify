@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { parseFile } from "music-metadata";
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -19,4 +20,14 @@ export function formatToMinutes(seconds: number) {
     }
 
     return `${minutes}:${secondsStr}`;
+}
+
+export async function getSongDuration(pathToSong: string) {
+    let duration = 0;
+
+    const metadata = await parseFile(pathToSong);
+
+    duration = metadata.format.duration || 0;
+
+    return duration;
 }

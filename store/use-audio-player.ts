@@ -1,11 +1,7 @@
 "use client";
 
 import { create } from "zustand";
-import { Prisma } from "@prisma/client";
-
-export type Song = Prisma.SongGetPayload<{
-  include: { usersLiked: true };
-}>;
+import { Song } from "@prisma/client";
 
 type AudioPlayerState = {
   currentSong: Song | null;

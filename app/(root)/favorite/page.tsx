@@ -1,8 +1,9 @@
 import { auth } from "@/auth";
 import { PlaylistContext } from "@/components/shared";
 import { Button } from "@/components/ui/button";
-import { Prisma } from "@prisma/client";
-import { HeartIcon } from "lucide-react";
+import { prisma } from "@/prisma/prisma-client";
+import { LikedSong, Prisma } from "@prisma/client";
+import { HeartIcon, Music } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
@@ -14,16 +15,22 @@ export const metadata: Metadata = {
 
 export type LikedSongFull = Prisma.LikedSongGetPayload<{
     include: {
-        song: {
-            include: {
-                usersLiked: true;
-            };
-        };
+        song: true;
     };
 }>;
 
 export default async function FavoritePage() {
     const session = await auth();
+    let songs: LikedSongFull[] = [];
+
+    songs = await prisma.likedSong.findMany({
+        where: {
+            userId: session?.user.id,
+        },
+        include: {
+            song: true,
+        },
+    });
 
     return (
         <div>
@@ -36,9 +43,22 @@ export default async function FavoritePage() {
                     <h1 className="font-bold text-4xl">Liked Songs</h1>
                 </div>
             </div>
-            <div className="mt-20 h-full">
+            <div className="mt-5 h-full">
                 {session?.user ? (
-                    <PlaylistContext />
+                    songs.length > 0 ? (
+                        <PlaylistContext
+                            songs={songs.map((song) => song.song)}
+                        />
+                    ) : (
+                        <div className="text-typography-gray flex flex-col items-center my-auto">
+                            <Music
+                                className="text-typography-gray opacity-40"
+                                size={150}
+                                strokeWidth={1.2}
+                            />
+                            <p className="opacity-50 text-xl">No songs yet</p>
+                        </div>
+                    )
                 ) : (
                     <>
                         <div className="flex flex-col justify-center h-full items-center text-typography-gray opacity-40">
@@ -51,7 +71,10 @@ export default async function FavoritePage() {
                                 Please log in to create playlists
                             </p>
                         </div>
-                        <Button asChild className="block w-fit px-8 mx-auto mt-4">
+                        <Button
+                            asChild
+                            className="block w-fit px-8 mx-auto mt-4"
+                        >
                             <Link href={"/login"}>Log In</Link>
                         </Button>
                     </>

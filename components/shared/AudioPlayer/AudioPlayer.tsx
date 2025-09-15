@@ -9,14 +9,14 @@ import ProgressBar from "./ProgressBar";
 import { motion, AnimatePresence } from "framer-motion";
 import BoxWrapper from "../BoxWrapper";
 import { FastAverageColor } from "fast-average-color";
-import { useAudioPlayer } from "@/context/useAudioPlayer";
+import { useAudioPlayer } from "@/store/use-audio-player";
 
 interface Props {
     className?: string;
 }
 
 export default function AudioPlayer({ className }: Props) {
-    const { currentSong: song } = useAudioPlayer();
+    const song = useAudioPlayer((state) => state.currentSong);
     const [avgColor, setAvgColor] = useState("");
 
     async function getAvgColor() {

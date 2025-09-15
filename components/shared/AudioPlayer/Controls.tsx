@@ -5,27 +5,25 @@ import { FaPause, FaPlay } from "react-icons/fa6";
 import { IoPlaySkipBackSharp, IoPlaySkipForwardSharp } from "react-icons/io5";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { useAudioPlayer } from "@/context/useAudioPlayer";
+import { useAudioPlayer } from "@/store/use-audio-player";
 
 interface Props {
     className?: string;
 }
 
 export default function Controls({ className }: Props) {
-    const {
-        currentSong: song,
-        isPaused,
-        pause,
-        play,
-        next,
-        prev,
-    } = useAudioPlayer();
+    const song = useAudioPlayer((state) => state.currentSong);
+    const isPaused = useAudioPlayer((state) => state.isPaused);
+    const pause = useAudioPlayer((state) => state.pause);
+    const play = useAudioPlayer((state) => state.play);
+    const next = useAudioPlayer((state) => state.next);
+    const prev = useAudioPlayer((state) => state.prev);
 
     function handlePause() {
         if (isPaused) {
-            play()
+            play();
         } else {
-            pause()
+            pause();
         }
     }
 

@@ -1,21 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { FaVolumeHigh } from "react-icons/fa6";
 import { VolumeSlider } from ".";
 import { GenIcon } from "react-icons";
 import { cn } from "@/lib/utils";
-import { useAudioPlayer } from "@/context/useAudioPlayer";
+import { useAudioPlayer } from "@/store/use-audio-player";
 
 interface Props {
     className?: string;
 }
 
 export default function VolumeControl({ className }: Props) {
-    const { volume, setVolume } = useAudioPlayer();
+    const volume = useAudioPlayer(state => state.volume)
+    const setVolume = useAudioPlayer(state => state.setVolume)
+    const [volumeBuf, setVolumeBuf] = useState(volume);
 
     function onVolumeChange(value: number[]) {
         setVolume(value[0]);
+        setVolumeBuf(value[0]);
     }
 
     function FaVolumeMedium(props: any) {
@@ -80,19 +83,31 @@ export default function VolumeControl({ className }: Props) {
         }
     }
 
+    function toggleVolume() {
+        if (volume === 0) {
+            setVolume(volumeBuf);
+        } else {
+            setVolume(0);
+        }
+    }
+
     return (
         <div className={cn("relative group gap-2", className)}>
             <div className="absolute bottom-7.5 -right-1 rounded-full p-3 border border-input bg-card invisible opacity-0 transition-all duration-300 delay-150 group-hover:visible group-hover:opacity-100 group-focus:visible group-focus:opacity-100">
                 <VolumeSlider
                     onValueChange={(value) => onVolumeChange(value)}
                     defaultValue={[volume]}
+                    value={[volume]}
                     max={1}
                     step={0.01}
                     orientation="vertical"
                     className={cn("w-10 !h-[50px]")}
                 />
             </div>
-            <div className="relative text-[27px] h-5.5 text-typography-gray cursor-pointer group-hover:text-primary group-focus:text-primary mb-1">
+            <div
+                onClick={toggleVolume}
+                className="relative text-[27px] h-5.5 text-typography-gray cursor-pointer group-hover:text-primary group-focus:text-primary mb-1"
+            >
                 {getVolumeIcon()}
             </div>
         </div>
