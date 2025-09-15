@@ -1,6 +1,6 @@
 import { Song } from "@prisma/client";
 import { create } from "zustand";
-import { axiosInstance } from "@/lib/axiosInstanse";
+import { axiosInstance } from "@/lib/api-client/axiosInstance";
 
 type State = {
     likedSongs: Song[];

@@ -1,12 +1,12 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import React, { useCallback } from "react";
+import { cn, formatToMinutes } from "@/lib/utils";
+import React from "react";
 import LikeBtn from "./LikeBtn";
-import { useShallow } from "zustand/react/shallow";
 import { motion } from "framer-motion";
 import { FaPause, FaPlay } from "react-icons/fa6";
-import { Song, useAudioPlayer } from "@/context/useAudioPlayer";
+import { useAudioPlayer } from "@/store/use-audio-player";
+import { Song } from "@prisma/client";
 
 interface Props {
     onPlayClick: () => void;
@@ -19,8 +19,11 @@ export default function PlaylistSongsItem({
     className,
     onPlayClick,
 }: Props) {
-    const { isPaused, currentSong, play, pause } = useAudioPlayer();
-    const { id, title, imageUrl, authorName } = song;
+    const isPaused = useAudioPlayer((state) => state.isPaused);
+    const currentSong = useAudioPlayer((state) => state.currentSong);
+    const play = useAudioPlayer((state) => state.play);
+    const pause = useAudioPlayer((state) => state.pause);
+    const { id, title, imageUrl, authorName, duration } = song;
 
     const handleClick = () => {
         if (currentSong?.id !== id) {
@@ -36,7 +39,12 @@ export default function PlaylistSongsItem({
     };
 
     return (
-        <div className={cn("group flex justify-between", className)}>
+        <div
+            className={cn(
+                "group flex justify-between items-center cursor-pointer w-full hover:bg-typography-gray/10 p-2 pr-4 -my-2 rounded-sm",
+                className
+            )}
+        >
             <div className="flex gap-2 items-center">
                 <div className="relative !size-[55px] rounded-sm overflow-hidden flex-none w-full bg-typography-gray/5">
                     {!isPaused && currentSong?.id === id && (
@@ -87,6 +95,9 @@ export default function PlaylistSongsItem({
                     <p className="text-typography-gray">By {authorName}</p>
                 </div>
             </div>
+            <span className="ml-auto tabular-nums font-medium text-sm text-primary/60 mr-5">
+                {formatToMinutes(duration)}
+            </span>
             <LikeBtn song={song} />
         </div>
     );

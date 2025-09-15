@@ -22,6 +22,8 @@ import PlaylistSongsItem from "./PlaylistSongsItem";
 import LikeBtn from "./LikeBtn";
 import PlaylistContext from "./PlaylistContext";
 import StoreProvider from "./StoreProvider";
+import Search from "./Search";
+import PlaylistLoadingSkeleton from "./PlaylistLoadingSkeleton";
 
 export {
     Sidebar,
@@ -48,4 +50,6 @@ export {
     LikeBtn,
     PlaylistContext,
     StoreProvider,
+    Search,
+    PlaylistLoadingSkeleton,
 };

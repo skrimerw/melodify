@@ -4,7 +4,8 @@ import React from "react";
 import { FaPause, FaPlay } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Song, useAudioPlayer } from "@/context/useAudioPlayer";
+import { useAudioPlayer } from "@/store/use-audio-player";
+import { Song } from "@prisma/client";
 
 interface Props {
     onPlayClick: () => void;
@@ -12,7 +13,10 @@ interface Props {
 }
 
 export function SongCard({ song, onPlayClick }: Props) {
-    const { pause, play, isPaused, currentSong } = useAudioPlayer();
+    const isPaused = useAudioPlayer((state) => state.isPaused);
+    const currentSong = useAudioPlayer((state) => state.currentSong);
+    const play = useAudioPlayer((state) => state.play);
+    const pause = useAudioPlayer((state) => state.pause);
     const { id, imageUrl, title, authorName } = song;
 
     const handleClick = () => {
@@ -29,9 +33,9 @@ export function SongCard({ song, onPlayClick }: Props) {
     };
 
     return (
-        <div className="group flex flex-col items-stretch gap-3 text-sm cursor-default bg-card-accent rounded-sm p-2 pb-4 w-full h-full">
+        <div className="group flex flex-col items-stretch gap-3 text-sm cursor-default transition-all hover:bg-card-accent rounded-sm p-3 pb-4 w-full h-fit">
             <div className="relative aspect-square rounded-sm overflow-hidden flex-none w-full bg-typography-gray/5">
-                {!isPaused && currentSong?.id === id && (
+                {/*  {!isPaused && currentSong?.id === id && (
                     <motion.div
                         animate={{ scale: [1, 1.8, 1] }}
                         transition={{
@@ -41,15 +45,15 @@ export function SongCard({ song, onPlayClick }: Props) {
                         }}
                         className="absolute top-1/2 left-1/2 -translate-1/2 size-6 rounded-full bg-btn-primary"
                     ></motion.div>
-                )}
+                )} */}
                 <img
                     src={imageUrl}
                     alt="Album cover"
-                    className="object-cover select-none h-full w-full"
+                    className="object-cover select-none h-full w-full transition-opacity"
                 />
                 <div
                     className={cn(
-                        "transition-all duration-200 group-hover:opacity-100 opacity-0 absolute h-full w-full top-1/2 left-1/2 -translate-1/2 flex items-center justify-center bg-black/35",
+                        "transition-all duration-200 group-hover:opacity-100 opacity-0 absolute h-[calc(100%+10px)] w-[calc(100%+10px)] top-1/2 left-1/2 -translate-1/2 flex items-center justify-center bg-black/35",
                         isPaused && currentSong?.id === id && "opacity-100"
                     )}
                 >
@@ -62,8 +66,8 @@ export function SongCard({ song, onPlayClick }: Props) {
                             scale: 1.05,
                         }}
                         className={cn(
-                            "cursor-pointer transition-[top] duration-200 group-hover:top-1/2 absolute top-[calc(50%+8px)] left-1/2 -translate-y-1/2 -translate-x-1/2 h-12 w-12 rounded-full bg-btn-primary text-background flex items-center justify-center text-base",
-                            isPaused && currentSong?.id === id && "top-1/2"
+                            "cursor-pointer transition-[bottom] duration-200 group-hover:bottom-4 absolute bottom-[calc(12px)] right-4 h-12 w-12 rounded-full bg-btn-primary text-background flex items-center justify-center text-base",
+                            isPaused && currentSong?.id === id && "bottom-4"
                         )}
                     >
                         {!isPaused && currentSong?.id === id ? (

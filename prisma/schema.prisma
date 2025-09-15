@@ -45,9 +45,9 @@ model Song {
 
     title      String
     authorName String
-
-    audioUrl String
-    imageUrl String
+    duration   Int
+    audioUrl   String
+    imageUrl   String
 
     usersLiked LikedSong[]
 

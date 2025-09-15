@@ -31,10 +31,12 @@ export default function FormInput({
     const initialType = props.type;
 
     return (
-        <div className={cn("relative flex flex-col gap-1.5", className)}>
-            <Label htmlFor={uniqueId} className="text-base w-fit">
-                {label}
-            </Label>
+        <div className={cn("relative", className)}>
+            {label && (
+                <Label htmlFor={uniqueId} className="block text-base w-fit mb-1.5">
+                    {label}
+                </Label>
+            )}
             <Input
                 id={uniqueId}
                 placeholder={placeholder}
@@ -70,7 +72,9 @@ export default function FormInput({
                     )}
                 </motion.button>
             )}
-            <span className="text-red-400 text-sm">{errorMsg}</span>
+            {errorMsg && (
+                <span className="block text-red-400 text-sm mt-1.5">{errorMsg}</span>
+            )}
         </div>
     );
 }
