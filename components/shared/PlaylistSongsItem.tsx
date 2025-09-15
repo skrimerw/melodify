@@ -98,7 +98,9 @@ export default function PlaylistSongsItem({
                     </div>
                 </div>
                 <div className="text-[15px]">
-                    <h3 className="transition-all hover:underline">{title}</h3>
+                    <h3 className="transition-all hover:underline w-fit cursor-pointer">
+                        {title}
+                    </h3>
                     <Link
                         href={`/artist/${artistId}`}
                         className="text-typography-gray transition-all hover:text-primary"

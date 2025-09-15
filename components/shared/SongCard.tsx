@@ -85,7 +85,7 @@ export function SongCard({ song, onPlayClick }: Props) {
                 </div>
             </div>
             <div className="flex flex-col gap-0.5 text-base flex-1">
-                <h2 className="h-full hover:underline">{title}</h2>
+                <h2 className="h-full hover:underline w-fit cursor-pointer">{title}</h2>
                 <Link
                     href={`/artist/${artistId}`}
                     className="text-typography-gray text-sm transition-all hover:text-primary w-fit"
