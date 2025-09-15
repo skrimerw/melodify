@@ -3,11 +3,12 @@
 import { useSession } from "next-auth/react";
 import React from "react";
 import LikeBtn from "../LikeBtn";
-import { useAudioPlayer } from "@/context/useAudioPlayer";
+import { useAudioPlayer } from "@/store/use-audio-player";
 import { Song } from "@prisma/client";
 
 export default function ActiveSong() {
-    const { currentSong: song } = useAudioPlayer();
+    const song = useAudioPlayer((state) => state.currentSong);
+
     const { data } = useSession();
 
     return (
