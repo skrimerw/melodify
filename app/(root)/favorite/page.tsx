@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import { PlaylistContext } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { prisma } from "@/prisma/prisma-client";
-import { LikedSong, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { HeartIcon, Music } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -15,7 +15,12 @@ export const metadata: Metadata = {
 
 export type LikedSongFull = Prisma.LikedSongGetPayload<{
     include: {
-        song: true;
+        song: {
+            include: {
+                album: true;
+                artist: true;
+            };
+        };
     };
 }>;
 
@@ -28,7 +33,12 @@ export default async function FavoritePage() {
             userId: session?.user.id,
         },
         include: {
-            song: true,
+            song: {
+                include: {
+                    album: true,
+                    artist: true,
+                },
+            },
         },
     });
 

@@ -23,7 +23,7 @@ export default function AudioPlayer({ className }: Props) {
         const fac = new FastAverageColor();
 
         if (song) {
-            const { hex } = await fac.getColorAsync(song?.imageUrl);
+            const { hex } = await fac.getColorAsync(song?.album.imageUrl);
 
             setAvgColor(hex);
         }

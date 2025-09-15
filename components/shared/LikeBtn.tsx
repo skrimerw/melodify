@@ -43,7 +43,7 @@ export default function LikeBtn({ song }: Props) {
             {liked ? (
                 <IoHeart className="text-btn-primary" />
             ) : (
-                <IoHeartOutline className="text-primary/60 transition-all hover:text-primary" strokeWidth={1.5} />
+                <IoHeartOutline className="text-primary/60 transition-all hover:text-primary" />
             )}
         </button>
     );

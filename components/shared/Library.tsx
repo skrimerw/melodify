@@ -16,9 +16,9 @@ export default function Library({ className }: Props) {
                     <TbPlaylist size={24} />
                     Your Library
                 </h3>
-                <button className="cursor-pointer transition-all hover:scale-[1.2]">
+                {/* <button className="cursor-pointer transition-all hover:scale-[1.2]">
                     <Plus size={20} />
-                </button>
+                </button> */}
             </header>
             <div className="flex flex-col gap-6 px-6 pb-5 pt-0.5 h-full">
                 <div className="text-typography-gray flex flex-col items-center my-auto">

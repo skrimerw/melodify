@@ -15,7 +15,7 @@ export default function ActiveSong() {
         <div className="group flex items-center gap-3 text-sm cursor-default">
             <div className="relative h-[50px] w-[50px] rounded-md overflow-hidden flex-none">
                 <img
-                    src={song?.imageUrl}
+                    src={song?.album.imageUrl}
                     alt="Album cover"
                     className="object-cover select-none"
                 />
@@ -23,7 +23,7 @@ export default function ActiveSong() {
             <div className="flex flex-col gap-1">
                 <h2>{song?.title}</h2>
                 <p className="font-normal text-typography-gray">
-                    By {song?.authorName}
+                    {song?.artist.name}
                 </p>
             </div>
             {data?.user && <LikeBtn song={song as Song} />}

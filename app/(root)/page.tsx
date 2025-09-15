@@ -1,9 +1,5 @@
 import { auth } from "@/auth";
-import {
-    FavoriteLink,
-    NewestSongsContainer,
-    SongCard,
-} from "@/components/shared";
+import { FavoriteLink, NewestSongsContainer } from "@/components/shared";
 import { prisma } from "@/prisma/prisma-client";
 import { Metadata } from "next";
 import React from "react";
@@ -13,16 +9,18 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-    const session = await auth()
+    const session = await auth();
 
     const songs = await prisma.song.findMany({
         include: {
-            usersLiked: session?.user && {
+            /*  usersLiked: session?.user && {
                 where: {
-                    userId: session?.user.id
-                }
-            }
-        }
+                    userId: session?.user.id,
+                },
+            }, */
+            album: true,
+            artist: true,
+        },
     });
 
     return (

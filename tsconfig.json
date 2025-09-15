@@ -28,7 +28,7 @@
         "**/*.tsx",
         ".next/types/**/*.ts",
         "lib/utils.test.ts",
-        "prisma/constant.ts"
+        "prisma/constants.ts"
     ],
     "exclude": ["node_modules"]
 }
