@@ -6,6 +6,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Api } from "@/lib/api-client";
 import PlaylistContext from "./PlaylistContext";
 import { SongWithAlbumAndArtist } from "@/types";
+import { nanoid } from "nanoid";
 
 export default function Search() {
     const form = useForm({
@@ -46,7 +47,7 @@ export default function Search() {
                 </form>
             </FormProvider>
             <div className="mt-5">
-                <PlaylistContext songs={songs} loading={loading} />
+                <PlaylistContext songs={songs} loading={loading} queueId={`search.${nanoid()}`} />
             </div>
         </div>
     );

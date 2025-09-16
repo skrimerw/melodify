@@ -41,7 +41,7 @@ export function SongCard({ song, onPlayClick }: Props) {
     return (
         <div className="group flex flex-col items-stretch gap-1 text-sm cursor-default transition-all hover:bg-card-accent rounded-sm p-2 w-full h-fit">
             <div className="relative aspect-square rounded-sm overflow-hidden flex-none w-full bg-typography-gray/5">
-                {/*  {!isPaused && currentSong?.id === id && (
+                 {!isPaused && currentSong?.id === id && (
                     <motion.div
                         animate={{ scale: [1, 1.8, 1] }}
                         transition={{
@@ -49,9 +49,9 @@ export function SongCard({ song, onPlayClick }: Props) {
                             repeat: Infinity,
                             ease: "easeInOut",
                         }}
-                        className="absolute top-1/2 left-1/2 -translate-1/2 size-6 rounded-full bg-btn-primary"
+                        className="absolute top-1/2 left-1/2 -translate-1/2 size-6 rounded-full bg-btn-primary group-hover:hidden"
                     ></motion.div>
-                )} */}
+                )}
                 <img
                     src={imageUrl}
                     alt="Album cover"
