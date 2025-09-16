@@ -57,6 +57,7 @@ export default async function FavoritePage() {
                 {session?.user ? (
                     songs.length > 0 ? (
                         <PlaylistContext
+                        queueId={`${session.user.id}.favorite`}
                             songs={songs.map((song) => song.song)}
                         />
                     ) : (
