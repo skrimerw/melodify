@@ -1,11 +1,9 @@
 import { ArtistListenBtn, PlaylistContext } from "@/components/shared";
 import { AlbumCard } from "@/components/shared/AlbumCard";
-import { Button } from "@/components/ui/button";
 import { prisma } from "@/prisma/prisma-client";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import React from "react";
-import { FaPlay } from "react-icons/fa6";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -44,7 +42,12 @@ export default async function ArtistPage({ params }: Props) {
       },
       albums: {
         include: {
-          songs: true,
+          songs: {
+            include: {
+              album: true,
+              artist: true,
+            },
+          },
         },
       },
     },
@@ -59,9 +62,9 @@ export default async function ArtistPage({ params }: Props) {
   return (
     <section>
       <div className="flex gap-7 items-center">
-        <div className="size-52 rounded-full overflow-hidden">
+        <div className="size-52">
           <img
-            className="size-full object-cover"
+            className="size-full rounded-full object-cover"
             src={heroImageUrl}
             alt={name}
           />
@@ -83,21 +86,16 @@ export default async function ArtistPage({ params }: Props) {
       <div className="mt-8">
         <h2 className="text-2xl font-bold">Albums</h2>
         <div className="grid grid-cols-5 gap-3 mt-2.5">
-          {albums.map(
-            ({ id, songs, imageUrl, title, artistId, releaseYear }) => {
-              return (
-                <AlbumCard
-                  key={id}
-                  songs={songs}
-                  imageUrl={imageUrl}
-                  title={title}
-                  artistName={artist.name}
-                  releaseYear={releaseYear}
-                  artistId={artistId}
-                />
-              );
-            }
-          )}
+          {albums.map((album) => {
+            return (
+              <AlbumCard
+                key={album.id}
+                songs={album.songs}
+                album={album}
+                artist={artist}
+              />
+            );
+          })}
         </div>
       </div>
     </section>

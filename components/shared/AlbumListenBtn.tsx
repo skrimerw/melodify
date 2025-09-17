@@ -6,22 +6,20 @@ import { FaPause, FaPlay } from "react-icons/fa6";
 import { useAudioPlayer } from "@/store/use-audio-player";
 import { cn } from "@/lib/utils";
 import { SongWithAlbumAndArtist } from "@/types";
-import { Artist } from "@prisma/client";
 
 interface Props {
-  artist: Artist;
   songs: SongWithAlbumAndArtist[];
   className?: string;
 }
 
-export default function ArtistListenBtn({ songs, className, artist }: Props) {
+export default function AlbumListenBtn({ songs, className }: Props) {
   const setQueue = useAudioPlayer((state) => state.setQueue);
   const setQueueId = useAudioPlayer((state) => state.setQueueId);
   const play = useAudioPlayer((state) => state.play);
   const pause = useAudioPlayer((state) => state.pause);
   const isPaused = useAudioPlayer((state) => state.isPaused);
   const currentQueueId = useAudioPlayer((state) => state.queueId);
-  const queueId = `${artist.name.toLowerCase()}.popular`;
+  const queueId = `${songs[0].artist.name.toLowerCase()}.album.${songs[0].album.title.toLowerCase()}`;
 
   function handlePause() {
     if (queueId !== currentQueueId) {

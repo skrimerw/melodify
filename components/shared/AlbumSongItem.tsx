@@ -11,12 +11,14 @@ import Link from "next/link";
 
 interface Props {
   onPlayClick: () => void;
+  index: number;
   song: SongWithAlbumAndArtist;
   className?: string;
 }
 
-export default function PlaylistSongsItem({
+export default function AlbumSongsItem({
   song,
+  index,
   className,
   onPlayClick,
 }: Props) {
@@ -53,7 +55,7 @@ export default function PlaylistSongsItem({
       )}
     >
       <div className="flex gap-2 items-center">
-        <div className="relative !size-[55px] rounded-sm overflow-hidden flex-none w-full bg-typography-gray/5">
+        <div className="relative rounded-sm overflow-hidden flex-none size-8.5">
           {!isPaused && currentSong?.id === id && (
             <motion.div
               animate={{ scale: [1, 1.5, 1] }}
@@ -65,14 +67,12 @@ export default function PlaylistSongsItem({
               className="absolute top-1/2 left-1/2 -translate-1/2 size-3 rounded-full bg-btn-primary"
             ></motion.div>
           )}
-          <img
-            src={imageUrl}
-            alt="Album cover"
-            className="object-cover select-none h-full w-full"
-          />
+          <span className="flex items-center justify-center  object-cover select-none h-full w-full text-typography-gray font-normal">
+            {index}
+          </span>
           <div
             className={cn(
-              "transition-all duration-200 group-hover:opacity-100 opacity-0 absolute h-full w-full top-1/2 left-1/2 -translate-1/2 flex items-center justify-center bg-black/35",
+              "transition-all duration-200 group-hover:opacity-100 opacity-0 absolute h-full w-full top-1/2 left-1/2 -translate-1/2 flex items-center justify-cente",
               isPaused && currentSong?.id === id && "opacity-100"
             )}
           >
