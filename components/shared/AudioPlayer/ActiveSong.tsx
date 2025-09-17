@@ -22,7 +22,12 @@ export default function ActiveSong() {
         />
       </div>
       <div className="flex flex-col gap-1">
-        <h2 className="hover:underline cursor-pointer">{song?.title}</h2>
+        <Link
+          href={`/album/${song?.albumId}`}
+          className="hover:underline cursor-pointer"
+        >
+          {song?.title}
+        </Link>
         <Link
           href={`/artist/${song?.artistId}`}
           className="font-normal text-typography-gray transition-all hover:text-primary"

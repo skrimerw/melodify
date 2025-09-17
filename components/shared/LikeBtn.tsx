@@ -41,7 +41,7 @@ export default function LikeBtn({ song }: Props) {
             onClick={handleToggleFavourite}
         >
             {liked ? (
-                <IoHeart className="text-btn-primary" />
+                <IoHeart className="text-btn-primary transition-all hover:opacity-80" />
             ) : (
                 <IoHeartOutline className="text-primary/60 transition-all hover:text-primary" />
             )}
