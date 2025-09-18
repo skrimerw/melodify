@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -12,11 +12,12 @@ interface Props {
 }
 
 export default function NavLink({ href, children, className }: Props) {
-    const pathname = usePathname()
+    const pathname = usePathname();
 
     return (
         <Link
             href={href}
+            prefetch={true}
             className={cn(
                 "flex items-center gap-4 py-2 px-4 rounded-md text-typography-gray font-medium transition-all hover:text-primary hover:bg-white/5",
                 href === pathname && "text-primary",

@@ -13,11 +13,11 @@ export default function Navigation({ className }: Props) {
     return (
         <BoxWrapper className={cn("px-2", className)}>
             <nav className="flex flex-col gap-1">
-                <NavLink href="/">
+                <NavLink href="/" >
                     <HiHome size={24} />
                     Home
                 </NavLink>
-                <NavLink href="/search">
+                <NavLink href="/search" >
                     <IoSearch size={24} />
                     Search
                 </NavLink>
