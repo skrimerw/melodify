@@ -30,15 +30,16 @@ export default function PlaylistContext({
   return (
     <div className={cn("flex flex-col gap-4", className)}>
       {loading && <PlaylistLoadingSkeleton length={5} />}
-      {songs.map((song) => {
-        return (
-          <PlaylistSongsItem
-            key={song.id}
-            song={song}
-            onPlayClick={onPlayClick}
-          />
-        );
-      })}
+      {!loading &&
+        songs?.map((song) => {
+          return (
+            <PlaylistSongsItem
+              key={song.id}
+              song={song}
+              onPlayClick={onPlayClick}
+            />
+          );
+        })}
     </div>
   );
 }

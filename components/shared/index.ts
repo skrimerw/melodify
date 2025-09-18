@@ -29,6 +29,12 @@ import ArtistListenBtn from "./ArtistListenBtn";
 import AlbumListenBtn from "./AlbumListenBtn";
 import AlbumContext from "./AlbumContext";
 import AlbumSongsItem from "./AlbumSongItem";
+import ArtistsTab from "./ArtistsTab";
+import ArtistCard from "./ArtistCard";
+import ArtistCardSkeleton from "./ArtistCardSkeleton";
+import TracksTab from "./TracksTab";
+import AlbumsTab from "./AlbumsTab";
+import AlbumCardSkeleton from "./AlbumCardSkeleton";
 
 export {
   Sidebar,
@@ -62,4 +68,10 @@ export {
   AlbumListenBtn,
   AlbumContext,
   AlbumSongsItem,
+  ArtistsTab,
+  ArtistCard,
+  ArtistCardSkeleton,
+  TracksTab,
+  AlbumsTab,
+  AlbumCardSkeleton,
 };

@@ -1,13 +1,11 @@
 import { axiosInstance } from "./axiosInstance";
-import { SongWithAlbumAndArtist } from "@/types";
+import { SearchResult, SongWithAlbumAndArtist, TabName } from "@/types";
 
-export const search = async (searchVal: string) => {
-  return await axiosInstance.get<SongWithAlbumAndArtist[]>(
-    "/api/songs/search",
-    {
-      params: {
-        search: searchVal,
-      },
-    }
-  );
+export const search = async (searchVal: string, tab?: TabName) => {
+  return await axiosInstance.get<SearchResult>("/songs/search", {
+    params: {
+      text: searchVal,
+      tab,
+    },
+  });
 };

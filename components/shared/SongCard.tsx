@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { useAudioPlayer } from "@/store/use-audio-player";
 import { SongWithAlbumAndArtist } from "@/types";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface Props {
   onPlayClick: () => void;
@@ -18,6 +19,7 @@ export function SongCard({ song, onPlayClick }: Props) {
   const currentSong = useAudioPlayer((state) => state.currentSong);
   const play = useAudioPlayer((state) => state.play);
   const pause = useAudioPlayer((state) => state.pause);
+
   const {
     id,
     album: { id: albumId, imageUrl },
@@ -39,7 +41,9 @@ export function SongCard({ song, onPlayClick }: Props) {
   };
 
   return (
-    <div className="group flex flex-col items-stretch gap-1 text-sm cursor-default transition-all hover:bg-card-accent rounded-sm p-2 w-full h-fit">
+    <div
+      className="group flex flex-col items-stretch gap-1 text-sm cursor-default transition-all hover:bg-card-accent rounded-sm p-2 w-full h-fit"
+    >
       <div className="relative aspect-square rounded-sm overflow-hidden flex-none w-full bg-typography-gray/5">
         {!isPaused && currentSong?.id === id && (
           <motion.div
