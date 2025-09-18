@@ -11,8 +11,6 @@ interface Props {
 }
 
 export default function ArtistsTab({ loading, artists, className }: Props) {
-  console.log(loading, artists)
-
   return (
     <div className={cn("grid grid-cols-6 gap-5", className)}>
       {loading
