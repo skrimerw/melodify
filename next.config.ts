@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
     outputFileTracingIncludes: {
         "/**/*": ["./email-templates/**"],
     },
+    experimental: {
+        serverComponentsHmrCache: true,
+    },
 };
 
 export default nextConfig;
