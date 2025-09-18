@@ -49,7 +49,7 @@ export default function SignInForm() {
             return;
         }
 
-        router.push("/");
+        location.pathname = "/";
 
         setLoginError("");
     };
