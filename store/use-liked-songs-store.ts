@@ -16,7 +16,7 @@ export const useLikedSongsStore = create<State>((set) => ({
     fetchSongs: async (userId) => {
         try {
             const { data } = await axiosInstance.get<Song[]>(
-                `/api/liked-songs/${userId}`
+                `/liked-songs/${userId}`
             );
 
             set({ likedSongs: data });

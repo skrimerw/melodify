@@ -8,6 +8,7 @@ import { useAudioPlayer } from "@/store/use-audio-player";
 import { Album, Artist, Song } from "@prisma/client";
 import Link from "next/link";
 import { SongWithAlbumAndArtist } from "@/types";
+import { useRouter } from "next/navigation";
 
 interface Props {
   songs: SongWithAlbumAndArtist[];
@@ -17,18 +18,12 @@ interface Props {
 
 export function AlbumCard({ songs, album, artist }: Props) {
   const isPaused = useAudioPlayer((state) => state.isPaused);
-  const currentSong = useAudioPlayer((state) => state.currentSong);
   const play = useAudioPlayer((state) => state.play);
   const pause = useAudioPlayer((state) => state.pause);
   const setQueue = useAudioPlayer((state) => state.setQueue);
   const setQueueId = useAudioPlayer((state) => state.setQueueId);
   const currentQueueId = useAudioPlayer((state) => state.queueId);
   const queueId = `${artist.name.toLowerCase()}.album.${album.title.toLowerCase()}`;
-  /* const {
-        id,
-        title,
-        artist: { name },
-    } = songs; */
 
   const handleClick = () => {
     if (queueId !== currentQueueId) {
@@ -45,7 +40,7 @@ export function AlbumCard({ songs, album, artist }: Props) {
   };
 
   return (
-    <div className="group flex flex-col items-stretch gap-1 text-sm cursor-default transition-all hover:bg-card-accent rounded-sm p-2 w-full h-fit">
+    <div className="group flex flex-col items-stretch gap-1 text-sm transition-all hover:bg-card-accent rounded-sm p-2 w-full h-fit cursor-pointer">
       <div className="relative aspect-square rounded-sm overflow-hidden flex-none w-full bg-typography-gray/5">
         {!isPaused && currentQueueId === queueId && (
           <motion.div
