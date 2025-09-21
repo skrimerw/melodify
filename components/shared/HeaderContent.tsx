@@ -34,7 +34,7 @@ export default function HeaderContent({ className, session }: Props) {
 
     return (
         <div className={cn("flex justify-between items-center px-6 pb-3 pt-3", className)}>
-            <div className={cn("absolute -z-1 inset-0 backdrop-blur-xs bg-card/10 transition-opacity duration-300 opacity-0", isBlury && "opacity-100")}></div>
+            <div className={cn("absolute -z-1 inset-0 backdrop-blur-[10px] bg-card/10 transition-opacity duration-300 opacity-0", isBlury && "opacity-100")}></div>
             <div className="flex gap-2">
                 <HistoryBack />
                 <HistoryForward />

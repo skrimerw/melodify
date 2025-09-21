@@ -43,7 +43,7 @@ export default function AlbumListenBtn({ songs, className }: Props) {
     <Button
       onClick={handlePause}
       className={cn(
-        "bg-btn-primary hover:bg-btn-primary/80 mt-8 gap-1.5 h-10 w-fit !px-6",
+        "bg-btn-primary hover:bg-btn-primary/80 gap-1.5 h-10 w-fit !px-6",
         className
       )}
     >

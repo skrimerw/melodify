@@ -2,21 +2,26 @@
 
 import React from "react";
 import { FaPause, FaPlay } from "react-icons/fa6";
-import { cn } from "@/lib/utils";
-import { useAudioPlayer } from "@/store/use-audio-player";
-import Link from "next/link";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import SeparationDot from "./SeparationDot";
+import { Album } from "@prisma/client";
+import { useAudioPlayer } from "@/store/use-audio-player";
+import { cn } from "@/lib/utils";
 import { SongWithAlbumAndArtist } from "@/types";
-import { Artist } from "@prisma/client";
 
 interface Props {
-    artist: Artist & { songs: SongWithAlbumAndArtist[] };
-    className?: string;
+    album: Album;
+    songs: SongWithAlbumAndArtist[];
+    authorName: string;
+    authorId: number;
 }
 
-export function ArtistCard({
-    artist: { id, name, heroImageUrl, songs },
-    className,
+export default function LibraryAlbumItem({
+    album: { id, imageUrl, title },
+    authorName,
+    authorId,
+    songs,
 }: Props) {
     const isPaused = useAudioPlayer((state) => state.isPaused);
     const play = useAudioPlayer((state) => state.play);
@@ -24,7 +29,7 @@ export function ArtistCard({
     const setQueue = useAudioPlayer((state) => state.setQueue);
     const setQueueId = useAudioPlayer((state) => state.setQueueId);
     const currentQueueId = useAudioPlayer((state) => state.queueId);
-    const queueId = `${name.toLowerCase()}.popular`;
+    const queueId = `${authorName.toLowerCase()}.album.${title.toLowerCase()}`;
 
     const handleClick = () => {
         if (queueId !== currentQueueId) {
@@ -41,13 +46,8 @@ export function ArtistCard({
     };
 
     return (
-        <div
-            className={cn(
-                "group flex flex-col items-center gap-2 text-sm transition-all hover:bg-white/3 rounded-sm p-2 w-full h-fit cursor-pointer",
-                className
-            )}
-        >
-            <div className="relative aspect-square rounded-full flex-none w-full bg-typography-gray/5">
+        <div className="group flex items-center gap-3 text-sm cursor-pointer">
+            <div className="relative h-[50px] w-[50px] rounded-sm overflow-hidden flex-none">
                 {!isPaused && currentQueueId === queueId && (
                     <motion.div
                         animate={{ scale: [1, 1.8, 1] }}
@@ -56,17 +56,17 @@ export function ArtistCard({
                             repeat: Infinity,
                             ease: "easeInOut",
                         }}
-                        className="absolute top-1/2 left-1/2 -translate-1/2 size-6 rounded-full bg-btn-primary group-hover:hidden"
+                        className="absolute top-1/2 left-1/2 -translate-1/2 size-3 rounded-full bg-btn-primary group-hover:hidden"
                     ></motion.div>
                 )}
                 <img
-                    src={heroImageUrl}
+                    src={imageUrl}
                     alt="Album cover"
-                    className="object-cover select-none h-full w-full transition-opacity rounded-full"
+                    className="object-cover select-none size-full"
                 />
                 <div
                     className={cn(
-                        "transition-all duration-200 group-hover:opacity-100 opacity-0 absolute h-[calc(100%)] w-[calc(100%)] top-1/2 left-1/2 -translate-1/2 flex items-center justify-center bg-black/35 rounded-full",
+                        "transition-all duration-200 group-hover:opacity-100 opacity-0 absolute h-[calc(100%+10px)] w-[calc(100%+10px)] top-1/2 left-1/2 -translate-1/2 flex items-center justify-center bg-black/35",
                         isPaused && currentQueueId === queueId && "opacity-100"
                     )}
                 >
@@ -79,26 +79,33 @@ export function ArtistCard({
                             scale: 1.05,
                         }}
                         className={cn(
-                            "cursor-pointer transition-[bottom] duration-200 group-hover:bottom-2 absolute bottom-0 right-2 h-12 w-12 rounded-full bg-btn-primary text-background flex items-center justify-center text-base",
-                            isPaused && currentQueueId === queueId && "bottom-2"
+                            "transition-[top] duration-200 group-hover:top-1/2 absolute top-[calc(50%+8px)] left-1/2 -translate-y-1/2 -translate-x-1/2 h-8 w-8 rounded-full bg-btn-primary text-background flex items-center justify-center text-base",
+                            isPaused && currentQueueId === queueId && "top-1/2"
                         )}
                     >
                         {!isPaused && currentQueueId === queueId ? (
-                            <FaPause size={20} />
+                            <FaPause />
                         ) : (
-                            <FaPlay className="ml-0.5" size={20} />
+                            <FaPlay className="ml-0.5" />
                         )}
                     </motion.div>
                 </div>
             </div>
-            <Link
-                href={`/artist/${id}`}
-                className="text-sm transition-all hover:underline underline-offset-2 w-fit"
-            >
-                {name}
-            </Link>
+            <div className="flex flex-col gap-1">
+                <Link href={`/album/${id}`} className="font-ys hover:underline">
+                    {title}
+                </Link>
+                <p className="font-normal text-typography-gray">
+                    Album
+                    <SeparationDot />
+                    <Link
+                        href={`/artist/${authorId}`}
+                        className="transition-colors hover:text-primary"
+                    >
+                        {authorName}
+                    </Link>
+                </p>
+            </div>
         </div>
     );
 }
-
-export default React.memo(ArtistCard);

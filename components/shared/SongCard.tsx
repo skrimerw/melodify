@@ -42,7 +42,7 @@ export function SongCard({ song, onPlayClick }: Props) {
 
   return (
     <div
-      className="group flex flex-col items-stretch gap-1 text-sm cursor-default transition-all hover:bg-card-accent rounded-sm p-2 w-full h-fit"
+      className="group flex flex-col items-stretch gap-1 text-sm cursor-default transition-all hover:bg-white/3 rounded-sm p-2 w-full h-fit"
     >
       <div className="relative aspect-square rounded-sm overflow-hidden flex-none w-full bg-typography-gray/5">
         {!isPaused && currentSong?.id === id && (
