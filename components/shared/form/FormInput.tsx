@@ -1,3 +1,5 @@
+"use client";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
@@ -33,7 +35,10 @@ export default function FormInput({
     return (
         <div className={cn("relative", className)}>
             {label && (
-                <Label htmlFor={uniqueId} className="block text-base w-fit mb-1.5">
+                <Label
+                    htmlFor={uniqueId}
+                    className="block text-base w-fit mb-1.5"
+                >
                     {label}
                 </Label>
             )}
@@ -73,7 +78,9 @@ export default function FormInput({
                 </motion.button>
             )}
             {errorMsg && (
-                <span className="block text-red-400 text-sm mt-1.5">{errorMsg}</span>
+                <span className="block text-red-400 text-sm mt-1.5">
+                    {errorMsg}
+                </span>
             )}
         </div>
     );

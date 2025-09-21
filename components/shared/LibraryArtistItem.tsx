@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import { FaPause, FaPlay } from "react-icons/fa6";
 import { motion } from "framer-motion";
