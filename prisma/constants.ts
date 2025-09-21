@@ -17,7 +17,7 @@ export const artists: Prisma.ArtistCreateManyInput[] = [
   },
   {
     name: "Paul McCartney",
-    heroImageUrl: "/images/artist-hero/paul-mccartney.webp",
+    heroImageUrl: "/images/artist-hero/paul-mccartney.png",
   },
 ];
 
@@ -30,7 +30,7 @@ export const albums: Prisma.AlbumCreateManyInput[] = [
   },
   {
     title: "Актриса весна",
-    imageUrl: "/images/album-covers/actrisa-vesna.webp",
+    imageUrl: "/images/album-covers/actrisa-vesna.png",
     releaseYear: 1992,
     artistId: 2,
   },

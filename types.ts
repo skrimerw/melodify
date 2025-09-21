@@ -1,32 +1,65 @@
 import { Artist, Prisma } from "@prisma/client";
 
 export type SongWithAlbumAndArtist = Prisma.SongGetPayload<{
-  include: {
-    album: true;
-    artist: true;
-  };
+    include: {
+        album: true;
+        artist: true;
+    };
 }>;
 
 export type AlbumWithSongs = Prisma.AlbumGetPayload<{
-  include: {
-    songs: true;
-  };
+    include: {
+        songs: true;
+    };
 }>;
 
-export type TabName = "top" | "artists" | "tracks" | "albums";
+export type ArtistWithSongs = Prisma.ArtistGetPayload<{
+    include: {
+        songs: true;
+    };
+}>;
+
+export type TabName = "all" | "artists" | "tracks" | "albums";
 
 export type SearchResult = {
-  songs?: SongWithAlbumAndArtist[];
-  artists?: Artist[];
-  albums?: Prisma.AlbumGetPayload<{
-    include: {
-      artist: true;
-      songs: {
+    songs?: SongWithAlbumAndArtist[];
+    artists?: Prisma.ArtistGetPayload<{
         include: {
-          album: true;
-          artist: true;
+            songs: {
+                include: {
+                    album: true;
+                    artist: true;
+                };
+            };
         };
-      };
-    };
-  }>[];
+    }>[];
+    albums?: Prisma.AlbumGetPayload<{
+        include: {
+            artist: true;
+            songs: {
+                include: {
+                    album: true;
+                    artist: true;
+                };
+            };
+        };
+    }>[];
+};
+
+export type LibraryResult = {
+    pinnedAlbums?: Prisma.AlbumGetPayload<{
+        include: {
+            artist: true;
+            songs: true;
+        };
+    }>[];
+    pinnedArtists?: Prisma.ArtistGetPayload<{
+        include: {
+            songs: {
+                include: {
+                    album: true;
+                };
+            };
+        };
+    }>[];
 };

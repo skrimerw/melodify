@@ -1,5 +1,7 @@
-import * as songs from "./songs";
+import * as song from "./songs";
+import * as library from "./library";
 
 export const Api = {
-    songs,
+    song,
+    library
 };

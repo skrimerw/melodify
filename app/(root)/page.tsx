@@ -13,20 +13,21 @@ export default async function Page() {
 
     const songs = await prisma.song.findMany({
         include: {
-            /*  usersLiked: session?.user && {
-                where: {
-                    userId: session?.user.id,
-                },
-            }, */
             album: true,
             artist: true,
         },
     });
 
+    const likedSongs = await prisma.likedSong.findFirst({
+        where: {
+            userId: session?.user.id,
+        },
+    });
+
     return (
         <div>
-            <FavoriteLink />
-            <div className="mt-8">
+            {session?.user && likedSongs && <FavoriteLink className="mb-8" />}
+            <div>
                 <h2 className="text-xl mb-5">Newest Songs</h2>
                 <NewestSongsContainer songs={songs} />
             </div>

@@ -8,9 +8,9 @@ export const metadata: Metadata = {
 
 export default function SearchPage() {
     return (
-        <div>
+        <div className="flex flex-col h-full">
             <h1 className="text-3xl font-semibold mb-5">Search</h1>
-            <Search />
+            <Search className="h-full" />
         </div>
     );
 }

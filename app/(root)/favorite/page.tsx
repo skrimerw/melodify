@@ -44,8 +44,8 @@ export default async function FavoritePage() {
 
   return (
     <div>
-      <div className="flex items-center gap-6 mt-6">
-        <div className="flex items-center justify-center bg-gradient-to-br from-[#3b1fa9] to-[#707b7f] size-[150px] max-[90rem]:size-[200px]">
+      <div className="flex items-center gap-6">
+        <div className="flex items-center justify-center bg-gradient-to-br from-20% to-100% from-[#4100f4] to-[#c1ecd8] size-52 rounded-sm">
           <HeartIcon fill="white" size={56} />
         </div>
         <div>

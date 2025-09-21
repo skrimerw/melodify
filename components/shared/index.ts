@@ -3,7 +3,7 @@ import Navigation from "./Navigation";
 import NavLink from "./NavLink";
 import BoxWrapper from "./BoxWrapper";
 import Library from "./Library";
-import LibraryItem from "./LibraryItem";
+import LibraryAlbumItem from "./LibraryAlbumItem";
 import FavoriteLink from "./FavoriteLink";
 import Header from "./Header";
 import HeaderContent from "./HeaderContent";
@@ -35,43 +35,59 @@ import ArtistCardSkeleton from "./ArtistCardSkeleton";
 import TracksTab from "./TracksTab";
 import AlbumsTab from "./AlbumsTab";
 import AlbumCardSkeleton from "./AlbumCardSkeleton";
+import AllTab from "./AllTab";
+import SearchTabs from "./SearchTabs";
+import SearchNothingFound from "./SearchNothingFound";
+import AlbumPinBtn from "./AlbumPinBtn";
+import SeparationDot from "./SeparationDot";
+import LibraryArtistItem from "./LibraryArtistItem";
+import LibraryArtistItemSkeleton from "./LibraryArtistItemSkeleton";
+import AverageBgColorSetter from "./AverageBgColorSetter";
 
 export {
-  Sidebar,
-  Navigation,
-  NavLink,
-  BoxWrapper,
-  Library,
-  LibraryItem,
-  FavoriteLink,
-  Header,
-  HeaderContent,
-  SongCard,
-  LogoutBtn,
-  Logo,
-  SignInForm,
-  SignUpForm,
-  HistoryBack,
-  HistoryForward,
-  FormProfile,
-  VerificationCode,
-  VerificationDialog,
-  NewestSongsContainer,
-  PlaylistSongsItem,
-  LikeBtn,
-  PlaylistContext,
-  StoreProvider,
-  Search,
-  PlaylistLoadingSkeleton,
-  AlbumCard,
-  ArtistListenBtn,
-  AlbumListenBtn,
-  AlbumContext,
-  AlbumSongsItem,
-  ArtistsTab,
-  ArtistCard,
-  ArtistCardSkeleton,
-  TracksTab,
-  AlbumsTab,
-  AlbumCardSkeleton,
+    Sidebar,
+    Navigation,
+    NavLink,
+    BoxWrapper,
+    Library,
+    LibraryAlbumItem,
+    FavoriteLink,
+    Header,
+    HeaderContent,
+    SongCard,
+    LogoutBtn,
+    Logo,
+    SignInForm,
+    SignUpForm,
+    HistoryBack,
+    HistoryForward,
+    FormProfile,
+    VerificationCode,
+    VerificationDialog,
+    NewestSongsContainer,
+    PlaylistSongsItem,
+    LikeBtn,
+    PlaylistContext,
+    StoreProvider,
+    Search,
+    PlaylistLoadingSkeleton,
+    AlbumCard,
+    ArtistListenBtn,
+    AlbumListenBtn,
+    AlbumContext,
+    AlbumSongsItem,
+    ArtistsTab,
+    ArtistCard,
+    ArtistCardSkeleton,
+    TracksTab,
+    AlbumsTab,
+    AlbumCardSkeleton,
+    AllTab,
+    SearchTabs,
+    SearchNothingFound,
+    AlbumPinBtn,
+    SeparationDot,
+    LibraryArtistItem,
+    LibraryArtistItemSkeleton,
+    AverageBgColorSetter,
 };

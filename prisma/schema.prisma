@@ -21,6 +21,8 @@ model User {
 
     verificationCode VerificationCode?
     likedSongs       LikedSong[]
+    pinnedAlbums     AlbumsPinned[]
+    pinnedArtists    ArtistsPinned[]
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -80,8 +82,9 @@ model Artist {
     name         String
     heroImageUrl String
 
-    songs  Song[]
-    albums Album[]
+    songs    Song[]
+    albums   Album[]
+    pinnedBy ArtistsPinned[]
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -97,8 +100,39 @@ model Album {
     artist   Artist @relation(fields: [artistId], references: [id])
     artistId Int
 
-    songs Song[]
+    songs    Song[]
+    pinnedBy AlbumsPinned[]
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+}
+
+model AlbumsPinned {
+    id Int @id @default(autoincrement())
+
+    user   User @relation(fields: [userId], references: [id])
+    userId Int
+
+    album   Album @relation(fields: [albumId], references: [id])
+    albumId Int
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@unique([albumId, userId])
+}
+
+model ArtistsPinned {
+    id Int @id @default(autoincrement())
+
+    user   User @relation(fields: [userId], references: [id])
+    userId Int
+
+    artist   Artist @relation(fields: [artistId], references: [id])
+    artistId Int
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@unique([artistId, userId])
 }
