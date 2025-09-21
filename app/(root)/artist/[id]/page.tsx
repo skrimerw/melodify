@@ -81,13 +81,13 @@ export default async function ArtistPage({ params }: Props) {
     });
 
     const { heroImageUrl, name, songs, albums } = artist;
-    let color = (await Vibrant.from(
+    /* let color = (await Vibrant.from(
         path.join("public", heroImageUrl)
-    ).getPalette()).LightVibrant?.hex || "";
+    ).getPalette()).LightVibrant?.hex || ""; */
 
     return (
         <section>
-            <AverageBgColorSetter color={color} />
+            {/* <AverageBgColorSetter color={color} /> */}
             <div className="flex gap-7 items-center">
                 <div className="size-52 rounded-full bg-accent">
                     <img

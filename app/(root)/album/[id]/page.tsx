@@ -79,13 +79,13 @@ export default async function AlbumPage({ params }: Props) {
 
     const { imageUrl, title, artist } = album;
 
-    let color =
+    /* let color =
         (await Vibrant.from(path.join("public", imageUrl)).getPalette())
-            .LightVibrant?.hex || "";
+            .LightVibrant?.hex || ""; */
 
     return (
         <section>
-            <AverageBgColorSetter color={color} />
+            {/* <AverageBgColorSetter color={color} /> */}
 
             <div className="flex gap-7 items-center">
                 <div className="size-52 rounded-sm overflow-hidden bg-accent">
