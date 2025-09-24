@@ -41,7 +41,7 @@ export function AlbumCard({ songs, album, artist, className }: Props) {
 
     return (
         <div className={cn("group flex flex-col items-stretch gap-1 text-sm transition-all hover:bg-white/3 rounded-sm p-2 w-full h-fit cursor-pointer", className)}>
-            <div className="relative aspect-square rounded-sm overflow-hidden flex-none w-full bg-typography-gray/5">
+            <div className="relative aspect-square rounded-sm overflow-hidden flex-none w-full bg-typography-gray/5 group-hover:shadow-lg">
                 {!isPaused && currentQueueId === queueId && (
                     <motion.div
                         animate={{ scale: [1, 1.8, 1] }}

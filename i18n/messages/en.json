@@ -1,0 +1,26 @@
+{
+    "common": {
+        "Login": "Log In",
+        "Signup": "Sign Up",
+        "Logout": "Log Out",
+        "names": {
+            "album": "Album",
+            "artist": "Artist",
+            "track": "Track"
+        }
+    },
+    "HomePage": {
+        "title": "Newest Songs"
+    },
+    "Navigation": {
+        "home": "Home",
+        "search": "Search"
+    },
+    "Library": {
+        "title": "Your Library",
+        "PlaylistNotification": {
+            "title": "Create your first playlist",
+            "description": "It's not hard! We'll help."
+        }
+    }
+}

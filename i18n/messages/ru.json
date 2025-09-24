@@ -1,0 +1,26 @@
+{
+    "common": {
+        "Login": "Войти",
+        "Signup": "Зарегистрироваться",
+        "Logout": "Выйти",
+        "names": {
+            "album": "Альбом",
+            "artist": "Исполнитель",
+            "track": "Трек"
+        }
+    },
+    "HomePage": {
+        "title": "Новые песни"
+    },
+    "Navigation": {
+        "home": "Главная",
+        "search": "Поиск"
+    },
+    "Library": {
+        "title": "Ваша медиатека",
+        "PlaylistNotification": {
+            "title": "Создай свой первый плейлист",
+            "description": "Это совсем не сложно! Мы поможем."
+        }
+    }
+}
