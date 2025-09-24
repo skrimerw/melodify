@@ -22,7 +22,7 @@ export default async function Layout({
             <main className="main-layout h-screen p-3 overflow-y-hidden">
                 <Sidebar className="w-[300px] overflow-hidden">
                     <Navigation />
-                    <Library className="overflow-auto" />
+                    <Library className="overflow-auto" isLogged={!!session?.user} />
                 </Sidebar>
                 <section className="relative z-0 h-full rounded-lg overflow-hidden bg-card">
                     <BoxWrapper className="flex flex-col main-container relative h-full z-10 overflow-auto bg-transparent p-0">

@@ -9,6 +9,7 @@ import LogoutBtn from "./LogoutBtn";
 import HistoryBack from "./HistoryBack";
 import HistoryForward from "./HistoryForward";
 import { Session } from "next-auth";
+import { useTranslations } from "next-intl";
 
 interface Props {
     className?: string;
@@ -16,6 +17,7 @@ interface Props {
 }
 
 export default function HeaderContent({ className, session }: Props) {
+    const t = useTranslations("common");
     const [isBlury, setIsBlury] = useState(false);
 
     function onScroll(e: any) {
@@ -33,8 +35,18 @@ export default function HeaderContent({ className, session }: Props) {
     }, []);
 
     return (
-        <div className={cn("flex justify-between items-center px-6 pb-3 pt-3", className)}>
-            <div className={cn("absolute -z-1 inset-0 backdrop-blur-[10px] bg-card/10 transition-opacity duration-300 opacity-0", isBlury && "opacity-100")}></div>
+        <div
+            className={cn(
+                "flex justify-between items-center px-6 pb-3 pt-3",
+                className
+            )}
+        >
+            <div
+                className={cn(
+                    "absolute -z-1 inset-0 backdrop-blur-[10px] bg-card/10 transition-opacity duration-300 opacity-0",
+                    isBlury && "opacity-100"
+                )}
+            ></div>
             <div className="flex gap-2">
                 <HistoryBack />
                 <HistoryForward />
@@ -52,12 +64,12 @@ export default function HeaderContent({ className, session }: Props) {
                 <div>
                     <Button asChild variant="link" className="hover:opacity-85">
                         <Link href="/signup" className="mr-2">
-                            Sign up
+                            {t("Signup")}
                         </Link>
                     </Button>
                     <Button asChild>
                         <Link href="/login" className="px-7">
-                            Log in
+                            {t("Login")}
                         </Link>
                     </Button>
                 </div>

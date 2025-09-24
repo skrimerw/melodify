@@ -88,7 +88,7 @@ export default async function AlbumPage({ params }: Props) {
             {/* <AverageBgColorSetter color={color} /> */}
 
             <div className="flex gap-7 items-center">
-                <div className="size-52 rounded-sm overflow-hidden bg-accent">
+                <div className="size-52 rounded-sm overflow-hidden bg-white/3">
                     <img
                         className="size-full object-cover"
                         src={imageUrl}

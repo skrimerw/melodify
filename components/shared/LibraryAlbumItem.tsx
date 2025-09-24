@@ -9,6 +9,7 @@ import { Album } from "@prisma/client";
 import { useAudioPlayer } from "@/store/use-audio-player";
 import { cn } from "@/lib/utils";
 import { SongWithAlbumAndArtist } from "@/types";
+import { useTranslations } from "next-intl";
 
 interface Props {
     album: Album;
@@ -23,6 +24,7 @@ export default function LibraryAlbumItem({
     authorId,
     songs,
 }: Props) {
+    const t = useTranslations("common.names");
     const isPaused = useAudioPlayer((state) => state.isPaused);
     const play = useAudioPlayer((state) => state.play);
     const pause = useAudioPlayer((state) => state.pause);
@@ -95,8 +97,8 @@ export default function LibraryAlbumItem({
                 <Link href={`/album/${id}`} className="font-ys hover:underline">
                     {title}
                 </Link>
-                <p className="font-normal text-typography-gray">
-                    Album
+                <p className="text-typography-gray">
+                    {t("album")}
                     <SeparationDot />
                     <Link
                         href={`/artist/${authorId}`}

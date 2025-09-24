@@ -35,7 +35,7 @@ export default function Controls({ className }: Props) {
                 whileTap={{
                     scale: 1.1,
                 }}
-                className="text-typography-gray cursor-pointer disabled:text-typography-gray/30 disabled:cursor-default transition-colors hover:text-primary"
+                className="text-white/60 cursor-pointer disabled:text-typography-gray/30 disabled:cursor-default transition-colors hover:text-primary"
             >
                 <IoPlaySkipBackSharp className="text-2xl" />
             </motion.button>
@@ -58,7 +58,7 @@ export default function Controls({ className }: Props) {
                 whileTap={{
                     scale: 1.1,
                 }}
-                className="text-typography-gray cursor-pointer disabled:text-typography-gray/30 cursor disabled:cursor-default transition-colors hover:text-primary"
+                className="text-white/60 cursor-pointer disabled:text-typography-gray/30 cursor disabled:cursor-default transition-colors hover:text-primary"
             >
                 <IoPlaySkipForwardSharp className="text-2xl" />
             </motion.button>

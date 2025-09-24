@@ -30,7 +30,7 @@ export default function ActiveSong() {
         </Link>
         <Link
           href={`/artist/${song?.artistId}`}
-          className="font-normal text-typography-gray transition-all hover:text-primary"
+          className="font-normal text-white/60 transition-all hover:text-primary w-fit"
         >
           {song?.artist.name}
         </Link>

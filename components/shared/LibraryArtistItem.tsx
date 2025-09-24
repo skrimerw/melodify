@@ -8,6 +8,7 @@ import { Artist } from "@prisma/client";
 import { SongWithAlbumAndArtist } from "@/types";
 import { useAudioPlayer } from "@/store/use-audio-player";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 interface Props {
     artist: Artist;
@@ -18,6 +19,7 @@ export default function LibraryArtistItem({
     artist: { heroImageUrl, name, id },
     songs,
 }: Props) {
+    const t = useTranslations("common.names")
     const isPaused = useAudioPlayer((state) => state.isPaused);
     const play = useAudioPlayer((state) => state.play);
     const pause = useAudioPlayer((state) => state.pause);
@@ -93,7 +95,7 @@ export default function LibraryArtistItem({
                 >
                     {name}
                 </Link>
-                <p className="font-normal text-typography-gray">Artist</p>
+                <p className="text-typography-gray">{t("artist")}</p>
             </div>
         </div>
     );

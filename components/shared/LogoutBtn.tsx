@@ -3,8 +3,10 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { signOut } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 export default function LogoutBtn() {
+    const t = useTranslations("common")
     const [loading, setLoading] = useState(false);
 
     const handlelLogOut = async () => {
@@ -23,7 +25,7 @@ export default function LogoutBtn() {
 
     return (
         <Button disabled={loading} className="px-7" onClick={handlelLogOut}>
-            Log out
+            {t("Logout")}
         </Button>
     );
 }

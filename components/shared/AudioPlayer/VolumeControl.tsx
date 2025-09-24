@@ -106,7 +106,7 @@ export default function VolumeControl({ className }: Props) {
             </div>
             <div
                 onClick={toggleVolume}
-                className="relative text-[27px] h-5.5 text-typography-gray cursor-pointer group-hover:text-primary group-focus:text-primary mb-1"
+                className="relative text-[27px] h-5.5 text-white/60 cursor-pointer group-hover:text-primary group-focus:text-primary mb-1"
             >
                 {getVolumeIcon()}
             </div>

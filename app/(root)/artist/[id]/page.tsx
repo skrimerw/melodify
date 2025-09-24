@@ -89,7 +89,7 @@ export default async function ArtistPage({ params }: Props) {
         <section>
             {/* <AverageBgColorSetter color={color} /> */}
             <div className="flex gap-7 items-center">
-                <div className="size-52 rounded-full bg-accent">
+                <div className="size-52 rounded-full bg-white/3">
                     <img
                         className="size-full rounded-full object-cover"
                         src={heroImageUrl}

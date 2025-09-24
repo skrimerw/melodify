@@ -43,6 +43,7 @@ import SeparationDot from "./SeparationDot";
 import LibraryArtistItem from "./LibraryArtistItem";
 import LibraryArtistItemSkeleton from "./LibraryArtistItemSkeleton";
 import AverageBgColorSetter from "./AverageBgColorSetter";
+import LanguagePopover from "./LanguagePopover";
 
 export {
     Sidebar,
@@ -90,4 +91,5 @@ export {
     LibraryArtistItem,
     LibraryArtistItemSkeleton,
     AverageBgColorSetter,
+    LanguagePopover
 };
