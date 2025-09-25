@@ -6,6 +6,7 @@ import { FaPause, FaPlay } from "react-icons/fa6";
 import { useAudioPlayer } from "@/store/use-audio-player";
 import { cn } from "@/lib/utils";
 import { SongWithAlbumAndArtist } from "@/types";
+import { useTranslations } from "next-intl";
 
 interface Props {
   songs: SongWithAlbumAndArtist[];
@@ -20,6 +21,7 @@ export default function AlbumListenBtn({ songs, className }: Props) {
   const isPaused = useAudioPlayer((state) => state.isPaused);
   const currentQueueId = useAudioPlayer((state) => state.queueId);
   const queueId = `${songs[0].artist.name.toLowerCase()}.album.${songs[0].album.title.toLowerCase()}`;
+  const t = useTranslations("common.names");
 
   function handlePause() {
     if (queueId !== currentQueueId) {
@@ -52,7 +54,7 @@ export default function AlbumListenBtn({ songs, className }: Props) {
       ) : (
         <FaPause className="!size-3.5" />
       )}
-      Listen
+      {t("listen")}
     </Button>
   );
 }
