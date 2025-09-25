@@ -2,6 +2,7 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { parseFile } from "music-metadata";
 import { AlbumWithSongs } from "@/types";
+import { TranslationValues, useTranslations } from "next-intl";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -42,11 +43,11 @@ export async function getSongDuration(pathToSong: string) {
   return duration;
 }
 /**
- * Returns total album duration in mm min ss sec fromat
+ * Returns total album duration in mm min ss sec format
  * @param album
  * @returns
  */
-export function getAlbumTotalFomattedTime(album: AlbumWithSongs) {
+export function getAlbumTotalFomattedTime(album: AlbumWithSongs, t: any) {
   let timeSum = 0;
   const songs = album.songs;
 
@@ -58,5 +59,5 @@ export function getAlbumTotalFomattedTime(album: AlbumWithSongs) {
   let minutes = Math.floor(roundedSeconds / 60);
   let seconds = roundedSeconds % 60;
 
-  return `${minutes} min ${seconds} sec`;
+  return `${minutes} ${t("minutes")} ${seconds} ${t("seconds")}`;
 }

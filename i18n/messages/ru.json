@@ -1,26 +1,76 @@
 {
-    "common": {
-        "Login": "Войти",
-        "Signup": "Зарегистрироваться",
-        "Logout": "Выйти",
-        "names": {
-            "album": "Альбом",
-            "artist": "Исполнитель",
-            "track": "Трек"
+  "common": {
+    "Login": "Войти",
+    "Signup": "Зарегистрироваться",
+    "Logout": "Выйти",
+    "SigninWith": "Войти через {provider}",
+    "names": {
+      "all": "Все",
+      "album": "{count, plural, one {Альбом} other {Альбомы}}",
+      "artist": "{count, plural, one {Исполнитель} other {Исполнители}}",
+      "track": "{count, plural, one {Трек} other {Треки}}",
+      "popularSongs": "Популярные песни",
+      "or": "или",
+      "listen": "Слушать"
+    },
+    "inputs": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Введите email",
+        "errorMessages": {
+          "nonempty": "Введите ваш email",
+          "email": "Введите корректный email (например, example@test.com)"
         }
-    },
-    "HomePage": {
-        "title": "Новые песни"
-    },
-    "Navigation": {
-        "home": "Главная",
-        "search": "Поиск"
-    },
-    "Library": {
-        "title": "Ваша медиатека",
-        "PlaylistNotification": {
-            "title": "Создай свой первый плейлист",
-            "description": "Это совсем не сложно! Мы поможем."
+      },
+      "password": {
+        "label": "Пароль",
+        "placeholder": "Введите пароль",
+        "errorMessages": {
+          "nonempty": "Введите ваше пароль"
         }
+      },
+      "username": {
+        "label": "Имя пользователя",
+        "placeholder": "Введите имя пользователя",
+        "errorMessages": {
+          "nonempty": "Введите ваше имя пользователя"
+        }
+      }
+    },
+    "timeUnits": {
+      "minutes": "мин",
+      "seconds": "сек"
     }
+  },
+  "HomePage": {
+    "title": "Новые песни"
+  },
+  "SearchPage": {
+    "title": "Поиск"
+  },
+  "LoginPage": {
+    "title": "Войти в Melodify",
+    "proposition": "Еще нет аккаунта?",
+    "errorMessages": {
+      "somethingWentWrong": "Что-то пошло не так"
+    }
+  },
+  "SignupPage": {
+    "title": "Зарегистрироваться в Melodify",
+    "proposition": "Уже есть аккаунт?"
+  },
+  "Search": {
+    "inputPlaceholder": "Что вы хотите найти?"
+  },
+  "Navigation": {
+    "home": "Главная",
+    "search": "Поиск"
+  },
+  "Library": {
+    "title": "Ваша медиатека",
+    "PlaylistNotification": {
+      "title": "Создай свой первый плейлист",
+      "description": "Это совсем не сложно! Мы поможем."
+    }
+  }
 }
