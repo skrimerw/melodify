@@ -28,7 +28,7 @@ export default function Library({ isLogged, className }: Props) {
 
     return (
         <BoxWrapper className={cn("flex flex-col h-full p-0", className)}>
-            <header className="sticky top-0 z-20 bg-card flex items-center justify-between text-typography-gray px-6 py-5 library-header-shadow">
+            <header className="sticky top-0 z-20 bg-card flex items-center justify-between text-typography-gray px-6 py-5 border-b border-accent/60 mb-2">
                 <h3 className="flex gap-3 items-centery font-ys">
                     <TbPlaylist size={24} />
                     {t("title")}

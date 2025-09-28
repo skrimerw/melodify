@@ -11,7 +11,7 @@ export default function HistoryBack() {
     return (
         <Button
             variant="secondary"
-            className="text-3xl bg-background size-7.5"
+            className="text-3xl bg-white/10 hover:bg-white/20 size-7.5"
             onClick={router.back}
             
         >

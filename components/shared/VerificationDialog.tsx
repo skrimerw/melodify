@@ -14,22 +14,24 @@ import { ChevronRight } from "lucide-react";
 import VerificationCode from "./VerificationCode";
 import createVerificationCode from "@/actions/create-verification-code";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 interface Props {
     className?: string;
 }
 
 export default function VerificationDialog({ className }: Props) {
+    const t = useTranslations("VerificationDialog")
     const { data } = useSession();
 
     async function handleConfirm() {
-        if (!data?.user) return;
+        /* if (!data?.user) return;
 
         try {
             await createVerificationCode(data?.user.id, data?.user.email);
         } catch (e) {
             console.error(e);
-        }
+        } */
     }
 
     return (
@@ -42,7 +44,7 @@ export default function VerificationDialog({ className }: Props) {
                     onClick={handleConfirm}
                 >
                     <RiErrorWarningFill className="!size-5 text-yellow-400" />
-                    Verify your email
+                    {t("title")}
                     <ChevronRight className="ml-auto !size-4.5" />
                 </Button>
             </DialogTrigger>

@@ -48,7 +48,7 @@ export default function LibraryAlbumItem({
     };
 
     return (
-        <div className="group flex items-center gap-3 text-sm cursor-pointer">
+        <div className="group flex items-center gap-3 text-sm cursor-pointer hover:bg-white/3 rounded-sm p-1.5 -m-1.5">
             <div className="relative h-[50px] w-[50px] rounded-sm overflow-hidden flex-none">
                 {!isPaused && currentQueueId === queueId && (
                     <motion.div
@@ -98,7 +98,7 @@ export default function LibraryAlbumItem({
                     {title}
                 </Link>
                 <p className="text-typography-gray">
-                    {t("album")}
+                    {t("album", {count:1})}
                     <SeparationDot />
                     <Link
                         href={`/artist/${authorId}`}

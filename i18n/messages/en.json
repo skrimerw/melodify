@@ -1,76 +1,109 @@
 {
-  "common": {
-    "Login": "Log In",
-    "Signup": "Sign Up",
-    "Logout": "Log Out",
-    "SigninWith": "Sign in with {provider}",
-    "names": {
-      "all": "All",
-      "album": "{count, plural, one {Album} other {Albums}}",
-      "artist": "{count, plural, one {Artist} other {Artists}}",
-      "track": "{count, plural, one {Track} other {Tracks}}",
-      "popularSongs": "Popular Songs",
-      "or": "or",
-      "listen": "Listen"
+    "common": {
+        "Login": "Log in",
+        "Signup": "Sign up",
+        "Logout": "Log out",
+        "SigninWith": "Sign in with {provider}",
+        "Confirm": "Confirm",
+        "names": {
+            "all": "All",
+            "album": "{count, plural, one {Album} other {Albums}}",
+            "artist": "{count, plural, one {Artist} other {Artists}}",
+            "track": "{count, plural, one {Track} other {Tracks}}",
+            "playlist": "{count, plural, one {Playlist} other {Playlists}}",
+            "popularSongs": "Popular Songs",
+            "or": "or",
+            "listen": "Listen"
+        },
+        "inputs": {
+            "email": {
+                "label": "Email",
+                "placeholder": "Enter your email",
+                "errorMessages": {
+                    "nonempty": "Please fill in your email",
+                    "email": "Please enter a valid email (e.g. example@test.com)"
+                }
+            },
+            "password": {
+                "label": "Password",
+                "placeholder": "Enter your password",
+                "errorMessages": {
+                    "nonempty": "Please fill in your password"
+                }
+            },
+            "username": {
+                "label": "Username",
+                "placeholder": "Enter your username",
+                "errorMessages": {
+                    "nonempty": "Please fill in your username"
+                }
+            }
+        },
+        "timeUnits": {
+            "minutes": "min",
+            "seconds": "sec"
+        }
     },
-    "inputs": {
-      "email": {
-        "label": "Email",
-        "placeholder": "Enter your email",
-        "errorMessages": {
-          "nonempty": "Please fill in your email",
-          "email": "Please enter a valid email (e.g. example@test.com)"
-        }
-      },
-      "password": {
-        "label": "Password",
-        "placeholder": "Enter your password",
-        "errorMessages": {
-          "nonempty": "Please fill in your password"
-        }
-      },
-      "username": {
-        "label": "Username",
-        "placeholder": "Enter your username",
-        "errorMessages": {
-          "nonempty": "Please fill in your username"
-        }
-      }
+    "HomePage": {
+        "pageTitle": "Home",
+        "title": "Newest Songs"
     },
-    "timeUnits": {
-      "minutes": "min",
-      "seconds": "sec"
+    "SearchPage": {
+        "pageTitle": "Search",
+        "title": "Search"
+    },
+    "LoginPage": {
+        "pageTitle": "Log in",
+        "title": "Log in to Melodify",
+        "proposition": "Haven't got an account?",
+        "errorMessages": {
+            "somethingWentWrong": "Something went wrong"
+        }
+    },
+    "SignupPage": {
+        "pageTitle": "Sign up",
+        "title": "Sign up to Melodify",
+        "proposition": "Already have an accout?"
+    },
+    "ProfilePage": {
+        "pageTitle": "Profile"
+    },
+    "FavoritePage": {
+        "pageTitle": "Favorite"
+    },
+    "VerifyEmailPage": {
+        "pageTitle": "Email Verification",
+        "confirmLater": "Confirm later"
+    },
+    "Search": {
+        "inputPlaceholder": "What do you want to play?"
+    },
+    "Navigation": {
+        "home": "Home",
+        "search": "Search"
+    },
+    "Library": {
+        "title": "Your Library",
+        "PlaylistNotification": {
+            "title": "Create your first playlist",
+            "description": "It's not hard! We'll help."
+        }
+    },
+    "FormProfile": {
+        "title": "Profile Info",
+        "isVerified": "your email is verified",
+        "isNotVerified": "verify your email to change password",
+        "updateInfo": "Update Info"
+    },
+    "VerificationDialog": {
+        "title": "Verify your email"
+    },
+    "VerificationCode": {
+        "title": "Please enter the 6-digit code we sent to your email",
+        "description": "Confirm your email to secure your account and recover access if you ever forget your password."
+    },
+    "FavoriteLink": {
+        "title": "Welcome Back",
+        "description": "Liked Songs"
     }
-  },
-  "HomePage": {
-    "title": "Newest Songs"
-  },
-  "SearchPage": {
-    "title": "Search"
-  },
-  "LoginPage": {
-    "title": "Log in to Melodify",
-    "proposition": "Haven't got an account?",
-    "errorMessages": {
-        "somethingWentWrong": "Something went wrong"
-    }
-  },
-  "SignupPage": {
-    "title": "Sign up to Melodify",
-    "proposition": "Already have an accout?"
-  },
-  "Search": {
-    "inputPlaceholder": "What do you want to play?"
-  },
-  "Navigation": {
-    "home": "Home",
-    "search": "Search"
-  },
-  "Library": {
-    "title": "Your Library",
-    "PlaylistNotification": {
-      "title": "Create your first playlist",
-      "description": "It's not hard! We'll help."
-    }
-  }
 }

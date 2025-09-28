@@ -8,6 +8,7 @@ import verifyEmail from "@/actions/verify-email";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { CircleAlert } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface Props {
     pushOnSuccessUrl?: string;
@@ -21,6 +22,7 @@ export default function VerificationCode({
     const [code, setCode] = useState("");
     const [verificationError, setVerificationError] = useState("");
     const router = useRouter();
+    const t = useTranslations();
 
     async function handleConfirm() {
         try {
@@ -43,11 +45,10 @@ export default function VerificationCode({
         <div className={className}>
             <div className="mb-10 text-center">
                 <h1 className="text-[34px] font-bold leading-tight mb-3">
-                    Please enter the 6-digit code we sent to your email
+                    {t("VerificationCode.title")}
                 </h1>
                 <p className="text-typography-gray font-normal">
-                    Confirm your email to secure your account and recover access
-                    if you ever forget your password.
+                    {t("VerificationCode.description")}
                 </p>
             </div>
             <form className="flex flex-col gap-5 max-w-[300px] mx-auto">
@@ -80,7 +81,7 @@ export default function VerificationCode({
                         handleConfirm();
                     }}
                 >
-                    Confirm
+                    {t("common.Confirm")}
                 </Button>
             </form>
         </div>

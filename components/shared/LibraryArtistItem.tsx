@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 import { FaPause, FaPlay } from "react-icons/fa6";
@@ -19,7 +19,7 @@ export default function LibraryArtistItem({
     artist: { heroImageUrl, name, id },
     songs,
 }: Props) {
-    const t = useTranslations("common.names")
+    const t = useTranslations("common.names");
     const isPaused = useAudioPlayer((state) => state.isPaused);
     const play = useAudioPlayer((state) => state.play);
     const pause = useAudioPlayer((state) => state.pause);
@@ -43,7 +43,7 @@ export default function LibraryArtistItem({
     };
 
     return (
-        <div className="group flex items-center gap-3 text-sm cursor-pointer">
+        <div className="group flex items-center gap-3 text-sm cursor-pointer hover:bg-white/3 rounded-sm p-1.5 -m-1.5">
             <div className="relative h-[50px] w-[50px] rounded-full overflow-hidden flex-none">
                 {!isPaused && currentQueueId === queueId && (
                     <motion.div
@@ -95,7 +95,10 @@ export default function LibraryArtistItem({
                 >
                     {name}
                 </Link>
-                <p className="text-typography-gray">{t("artist")}</p>
+                <p className="text-typography-gray">
+                    {" "}
+                    {t("artist", { count: 1 })}
+                </p>
             </div>
         </div>
     );

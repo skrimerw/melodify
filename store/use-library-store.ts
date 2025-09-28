@@ -1,6 +1,4 @@
-import { Song } from "@prisma/client";
 import { create } from "zustand";
-import { axiosInstance } from "@/lib/api-client/axiosInstance";
 import { Api } from "@/lib/api-client";
 import { LibraryResult } from "@/types";
 

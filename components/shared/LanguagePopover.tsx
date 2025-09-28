@@ -35,13 +35,13 @@ export default function LanguagePopover() {
             <PopoverTrigger asChild>
                 <Button
                     variant={"outline"}
-                    className="mt-auto w-fit h-8.5 text-sm font-semibold data-[state='open']:!border-primary"
+                    className="mt-auto w-fit h-8.5 text-sm font-semibold data-[state='open']:!border-primary !bg-card"
                 >
                     <Globe />
                     {languages[lang].name}
                 </Button>
             </PopoverTrigger>
-            <PopoverContent align="start" sideOffset={10} className="w-40 p-1">
+            <PopoverContent align="start" side="top" sideOffset={10} className="w-40 p-1">
                 {(Object.keys(languages) as Locale[]).map((locale, i) => {
                     return (
                         <PopoverClose
@@ -55,7 +55,7 @@ export default function LanguagePopover() {
                             />
                             <div className="flex flex-col">
                                 <span>{languages[locale].name}</span>
-                                <span className="text-typography-gray text-[12px]">
+                                <span className="text-typography-gray text-[12px] text-start">
                                     {languages[locale].enName}
                                 </span>
                             </div>
