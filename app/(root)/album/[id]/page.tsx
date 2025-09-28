@@ -98,7 +98,7 @@ export default async function AlbumPage({ params }: Props) {
           <p className="text-sm text-typography-gray">
             {t("album", { count: 1 })}
           </p>
-          <h1 className="text-5xl font-bold">{title}</h1>
+          <h1 className="overlayed-heading text-5xl font-bold">{title}</h1>
           <p className="text-sm text-typography-gray mt-3.5">
             <Link
               href={`/artist/${songs[0].artistId}`}

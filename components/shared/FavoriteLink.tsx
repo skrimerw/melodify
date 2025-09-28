@@ -1,4 +1,5 @@
 import { HeartIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React from "react";
 
@@ -7,9 +8,13 @@ interface Props {
 }
 
 export default function FavoriteLink({ className }: Props) {
+    const t = useTranslations("FavoriteLink");
+
     return (
         <div className={className}>
-            <h2 className="text-3xl font-semibold mb-5">Welcome Back</h2>
+            <h2 className="overlayed-heading text-3xl font-semibold mb-5">
+                {t("title")}
+            </h2>
             <Link
                 href="/favorite"
                 className="flex rounded-sm items-center gap-5 overflow-hidden bg-typography-gray/20 max-w-[300px]"
@@ -18,8 +23,7 @@ export default function FavoriteLink({ className }: Props) {
                     <HeartIcon fill="white" size={28} />
                 </div>
                 <span className="font-medium text-base mb-0.5">
-                    Liked Songs
-                </span>
+                    {t("description")}</span>
             </Link>
         </div>
     );

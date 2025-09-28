@@ -1,13 +1,16 @@
 import { auth } from "@/auth";
 import { FormProfile } from "@/components/shared";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import React from "react";
 
-export const metadata: Metadata = {
-    title: "Profile - Melodify",
-};
-
+export async function generateMetadata(): Promise<Metadata> {
+    const t = await getTranslations()
+    return {
+        title: `${t("ProfilePage.pageTitle")} - Melodify`,
+    };
+}
 export default async function ProfilePage() {
     const session = await auth();
 

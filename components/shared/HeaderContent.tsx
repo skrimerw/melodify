@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import HistoryBack from "./HistoryBack";
 import HistoryForward from "./HistoryForward";
 import { Session } from "next-auth";
 import { useTranslations } from "next-intl";
+import { useOverlayedHeadingStore } from "@/store/use-overlayed-heading";
 
 interface Props {
     className?: string;
@@ -19,6 +20,13 @@ interface Props {
 export default function HeaderContent({ className, session }: Props) {
     const t = useTranslations("common");
     const [isBlury, setIsBlury] = useState(false);
+    const headerContent = useRef<HTMLDivElement>(null);
+    const overlayedHeading = useOverlayedHeadingStore(
+        (state) => state.overlayedHeading
+    );
+    const setOverlayedHeading = useOverlayedHeadingStore(
+        (state) => state.setOverlayedHeading
+    );
 
     function onScroll(e: any) {
         if (e.target.scrollTop >= 20) {
@@ -26,6 +34,29 @@ export default function HeaderContent({ className, session }: Props) {
         } else {
             setIsBlury(false);
         }
+
+        const overlayedHeadingList =
+            document.querySelectorAll<HTMLHeadingElement>(".overlayed-heading");
+        let lastOverlayedHeading = "";
+
+        overlayedHeadingList.forEach((overlayedHeading) => {
+            if (headerContent.current) {
+                const overlayedHeadingCoords =
+                    overlayedHeading.getBoundingClientRect();
+                const headerContentCoords =
+                    headerContent.current.getBoundingClientRect();
+
+                if (
+                    overlayedHeadingCoords.top +
+                        overlayedHeadingCoords.height / 2 <
+                    headerContentCoords?.bottom
+                ) {
+                    lastOverlayedHeading = overlayedHeading.textContent;
+                }
+            }
+        });
+
+        setOverlayedHeading(lastOverlayedHeading);
     }
 
     useEffect(() => {
@@ -36,6 +67,7 @@ export default function HeaderContent({ className, session }: Props) {
 
     return (
         <div
+            ref={headerContent}
             className={cn(
                 "flex justify-between items-center px-6 pb-3 pt-3",
                 className
@@ -47,9 +79,19 @@ export default function HeaderContent({ className, session }: Props) {
                     isBlury && "opacity-100"
                 )}
             ></div>
-            <div className="flex gap-2">
-                <HistoryBack />
-                <HistoryForward />
+            <div className="flex items-center gap-4">
+                <div className="flex gap-2">
+                    <HistoryBack />
+                    <HistoryForward />
+                </div>
+                <h2
+                    className={cn(
+                        "font-ys text-[22px] transition-opacity duration-300",
+                        overlayedHeading ? "opacity-100" : "opacity-0"
+                    )}
+                >
+                    {overlayedHeading}
+                </h2>
             </div>
             {session?.user ? (
                 <div>

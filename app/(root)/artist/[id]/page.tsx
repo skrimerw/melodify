@@ -100,7 +100,7 @@ export default async function ArtistPage({ params }: Props) {
         </div>
         <div className="flex flex-col">
           <p className="text-sm text-typography-gray">{t("artist", {count:1})}</p>
-          <h1 className="text-5xl font-bold">{name}</h1>
+          <h1 className="overlayed-heading text-5xl font-bold">{name}</h1>
           <div className="flex gap-3 items-center mt-8">
             <ArtistListenBtn songs={songs} artist={artist} />
             <ArtistPinBtn artist={artist} isInitiallyPinned={!!isPinned} />

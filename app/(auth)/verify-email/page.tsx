@@ -3,16 +3,21 @@ import { auth } from "@/auth";
 import { VerificationCode } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
 
-export const metadata: Metadata = {
-    title: "Email Verification - Melodify",
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const t = await getTranslations()
+    return {
+        title: `${t("VerifyEmailPage.pageTitle")} - Melodify`,
+    };
+}
 
 export default async function VerifyEmailPage() {
     const session = await auth();
+    const t = await getTranslations("VerifyEmailPage")
 
     if (!session?.user || session.user.isVerified) {
         redirect("/");
@@ -31,7 +36,7 @@ export default async function VerifyEmailPage() {
                 variant={"link"}
                 className="block text-typography-gray font-medium hover:text-foreground w-fit mx-auto"
             >
-                <Link href={"/"}>Confirm later</Link>
+                <Link href={"/"}>{t('confirmLater')}</Link>
             </Button>
         </>
     );

@@ -13,6 +13,7 @@ import VerificationDialog from "./VerificationDialog";
 import { BiSolidCheckCircle, BiSolidLock } from "react-icons/bi";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const UpdateProfileSchema = z.object({
     email: z
@@ -31,6 +32,7 @@ interface Props {
 }
 
 export default function FormProfile({ data }: Props) {
+    const t = useTranslations();
     const form = useForm({
         resolver: zodResolver(UpdateProfileSchema),
         defaultValues: {
@@ -62,7 +64,9 @@ export default function FormProfile({ data }: Props) {
 
     return (
         <>
-            <h1 className="text-4xl font-bold mb-6 mt-2">Profile Info</h1>
+            <h1 className="overlayed-heading text-4xl font-bold mb-6 mt-2">
+                {t("FormProfile.title")}
+            </h1>
             <FormProvider {...form}>
                 <form
                     className="max-w-[400px] flex flex-col gap-3"
@@ -77,23 +81,23 @@ export default function FormProfile({ data }: Props) {
                                     className="text-green-400"
                                 />
                                 <span className="inline-block mb-1 font-normal">
-                                    your email is verified
+                                    {t("FormProfile.isVerified")}
                                     {/* <span className="border-b border-dashed border-typography-gray font-normal cursor-pointer hover:text-foreground hover:border-foreground"></span> */}
                                 </span>
                             </div>
                         )}
                         <FormInput
-                            label="Email"
+                            label={t("common.inputs.email.label")}
                             name="email"
-                            placeholder="Enter your email"
+                            placeholder={t("common.inputs.email.placeholder")}
                             type="email"
                             autoComplete="email"
                         />
                     </div>
                     <FormInput
-                        label="Username"
+                        label={t("common.inputs.username.label")}
                         name="username"
-                        placeholder="Enter your username"
+                        placeholder={t("common.inputs.username.placeholder")}
                         autoComplete="username"
                     />
                     <div className="relative">
@@ -104,15 +108,17 @@ export default function FormProfile({ data }: Props) {
                                     className="text-yellow-400"
                                 />
                                 <span className="inline-block mb-1 font-normal">
-                                    verify your email to change password
+                                    {t("FormProfile.isNotVerified")}
                                     {/* <span className="border-b border-dashed border-typography-gray font-normal cursor-pointer hover:text-foreground hover:border-foreground"></span> */}
                                 </span>
                             </div>
                         )}
                         <FormInput
-                            label="Password"
+                            label={t("common.inputs.password.label")}
                             name="password"
-                            placeholder="Enter your new password"
+                            placeholder={t(
+                                "common.inputs.password.placeholder"
+                            )}
                             type="password"
                             autoComplete="new-password"
                             disabled={!data.isVerified}
@@ -125,7 +131,7 @@ export default function FormProfile({ data }: Props) {
                         disabled={loading}
                         className="w-full bg-btn-primary hover:bg-btn-primary/85"
                     >
-                        Update Info
+                        {t("FormProfile.updateInfo")}
                     </Button>
                 </form>
             </FormProvider>

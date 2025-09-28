@@ -156,7 +156,7 @@ export const useAudioPlayer = create<AudioPlayerState>((set, get) => {
                 queueId: null,
             });
 
-            audio?.pause()
+            audio?.pause();
         },
     };
 });

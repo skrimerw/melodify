@@ -56,7 +56,7 @@ export default function AudioPlayer({ className }: Props) {
                         <BoxWrapper
                             className={cn("p-2 pr-6 transition-colors")}
                             style={{
-                                backgroundColor: avgColor + "60",
+                                backgroundColor: avgColor + "40",
                             }}
                         >
                             <div className="flex justify-between items-center">
