@@ -84,8 +84,9 @@ export default function HeaderContent({ className, session }: Props) {
           <HistoryForward />
         </div>
         <h2
+        
           className={cn(
-            "font-ys text-[22px] transition-opacity duration-300",
+            "font-ys text-[22px] font-bold transition-opacity duration-300 cursor-default",
             overlayedHeading ? "opacity-100" : "opacity-0"
           )}
         >
