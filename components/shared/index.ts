@@ -44,10 +44,7 @@ import LibraryArtistItem from "./LibraryArtistItem";
 import LibraryArtistItemSkeleton from "./LibraryArtistItemSkeleton";
 import AverageBgColorSetter from "./AverageBgColorSetter";
 import LanguagePopover from "./LanguagePopover";
-<<<<<<< HEAD
 import Slider from "./Slider"
-=======
->>>>>>> f94a98f64f7b019f58ddf425c0415d6fcc327482
 
 export {
     Sidebar,
