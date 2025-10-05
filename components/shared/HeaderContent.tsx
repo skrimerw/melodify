@@ -75,7 +75,7 @@ export default function HeaderContent({ className, session }: Props) {
         className={cn(
           "absolute -z-1 inset-0 backdrop-blur-[10px] bg-card/10 transition-opacity duration-300 opacity-0",
           isBlury &&
-            "opacity-100 background: linear-gradient(180deg, #121212, transparent 100%); bg-gradient-to-b from-[#121212] to-transparent to-100%"
+            "opacity-100 bg-gradient-to-b from-[#121212] to-transparent to-100%"
         )}
       ></div>
       <div className="flex items-center gap-4">
