@@ -11,10 +11,10 @@ export const artists: Prisma.ArtistCreateManyInput[] = [
     name: "ДДТ",
     heroImageUrl: "/images/artist-hero/ddt.jpg",
   },
-  {
+  /* {
     name: "Radiohead",
     heroImageUrl: "/images/artist-hero/radiohead.png",
-  },
+  }, */
   {
     name: "Paul McCartney",
     heroImageUrl: "/images/artist-hero/paul-mccartney.png",
@@ -34,17 +34,17 @@ export const albums: Prisma.AlbumCreateManyInput[] = [
     releaseYear: 1992,
     artistId: 2,
   },
-  {
+ /*  {
     title: "OK Computer",
     imageUrl: "/images/album-covers/ok-computer.jpg",
     releaseYear: 1997,
     artistId: 3,
-  },
+  }, */
   {
     title: "Pure McCartney",
     imageUrl: "/images/album-covers/pure-mccartney.jpg",
     releaseYear: 2016,
-    artistId: 4,
+    artistId: 3,
   },
 ];
 
@@ -61,23 +61,23 @@ const songsInitial: Omit<Prisma.SongCreateManyInput, "duration">[] = [
     albumId: 2,
     artistId: 2,
   },
-  {
+  /* {
     title: "Karma Police",
     audioUrl: "/audio/karma-police.mp3",
     albumId: 3,
     artistId: 3,
-  },
+  }, */
   {
     title: "No More Lonely Nights",
     audioUrl: "/audio/no-more-lonely-nights.mp3",
-    albumId: 4,
-    artistId: 4,
+    albumId: 3,
+    artistId: 3,
   },
   {
     title: "My Love",
     audioUrl: "/audio/my-love.mp3",
-    albumId: 4,
-    artistId: 4,
+    albumId: 3,
+    artistId: 3,
   },
 ];
 

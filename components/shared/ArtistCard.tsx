@@ -93,6 +93,7 @@ export function ArtistCard({
             </div>
             <Link
                 href={`/artist/${id}`}
+                scroll={false}
                 className="text-sm transition-all hover:underline underline-offset-2 w-fit"
             >
                 {name}

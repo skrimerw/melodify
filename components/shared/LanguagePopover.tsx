@@ -1,6 +1,6 @@
 "use client";
 
-import React  from "react";
+import React from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { Globe } from "lucide-react";
@@ -34,14 +34,22 @@ export default function LanguagePopover() {
         <Popover>
             <PopoverTrigger asChild>
                 <Button
+                    asChild
                     variant={"outline"}
                     className="mt-auto w-fit h-8.5 text-sm font-semibold data-[state='open']:!border-primary !bg-card"
                 >
-                    <Globe />
-                    {languages[lang].name}
+                    <div>
+                        <Globe />
+                        {languages[lang].name}
+                    </div>
                 </Button>
             </PopoverTrigger>
-            <PopoverContent align="start" side="top" sideOffset={10} className="w-40 p-1">
+            <PopoverContent
+                align="start"
+                side="top"
+                sideOffset={10}
+                className="w-40 p-1"
+            >
                 {(Object.keys(languages) as Locale[]).map((locale, i) => {
                     return (
                         <PopoverClose

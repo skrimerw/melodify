@@ -48,7 +48,7 @@ export default function PlaylistSongsItem({
   return (
     <div
       className={cn(
-        "group flex justify-between items-center cursor-pointer w-full hover:bg-typography-gray/10 p-2 pr-4 -my-2 rounded-sm",
+        "group flex justify-between items-center cursor-pointer w-full hover:bg-typography-gray/10 p-2 pr-4 -mx-2 rounded-sm",
         className
       )}
     >

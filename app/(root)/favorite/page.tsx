@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import { PlaylistContext } from "@/components/shared";
+import ScrollTop from "@/components/shared/ScrollTop";
 import { Button } from "@/components/ui/button";
 import { prisma } from "@/prisma/prisma-client";
 import { Prisma } from "@prisma/client";
@@ -48,6 +49,7 @@ export default async function FavoritePage() {
 
     return (
         <div>
+            <ScrollTop />
             <div className="flex items-center gap-6">
                 <div className="flex items-center justify-center bg-gradient-to-br from-20% to-100% from-[#4100f4] to-[#c1ecd8] size-52 rounded-sm">
                     <HeartIcon fill="white" size={56} />

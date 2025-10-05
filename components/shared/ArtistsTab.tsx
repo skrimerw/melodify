@@ -11,7 +11,7 @@ interface Props {
     className?: string;
 }
 
-export default function ArtistsTab({ loading, artists, className }: Props) {
+const ArtistsTab = React.memo(({ loading, artists, className }: Props) => {
     return (
         <>
             {artists?.length === 0 ? (
@@ -31,4 +31,6 @@ export default function ArtistsTab({ loading, artists, className }: Props) {
             )}
         </>
     );
-}
+});
+
+export default ArtistsTab;

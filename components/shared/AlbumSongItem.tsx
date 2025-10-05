@@ -67,9 +67,12 @@ export default function AlbumSongsItem({
               className="absolute top-1/2 left-1/2 -translate-1/2 size-3 rounded-full bg-btn-primary"
             ></motion.div>
           )}
-          <span className="flex items-center justify-center  object-cover select-none h-full w-full text-typography-gray font-normal">
+          {
+            currentSong?.id !== id &&
+            <span className="flex items-center justify-center  object-cover select-none h-full w-full text-typography-gray font-normal">
             {index}
           </span>
+          }
           <div
             className={cn(
               "transition-all duration-200 group-hover:opacity-100 opacity-0 absolute h-full w-full top-1/2 left-1/2 -translate-1/2 flex items-center justify-cente",

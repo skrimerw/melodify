@@ -5,6 +5,7 @@ import PlaylistSongsItem from "./PlaylistSongsItem";
 import PlaylistLoadingSkeleton from "./PlaylistLoadingSkeleton";
 import { useAudioPlayer } from "@/store/use-audio-player";
 import { SongWithAlbumAndArtist } from "@/types";
+import { Virtuoso } from "react-virtuoso";
 
 interface Props {
     songs: SongWithAlbumAndArtist[];
@@ -13,7 +14,7 @@ interface Props {
     className?: string;
 }
 
-export default function PlaylistContext({
+export default function VirtualizedPlaylistContext({
     songs,
     loading,
     queueId,
@@ -30,17 +31,22 @@ export default function PlaylistContext({
         <>
             {loading && <PlaylistLoadingSkeleton length={5} />}
             {!loading && songs?.length && (
-                <div className="flex flex-col">
-                    {songs?.map((song) => {
-                        return (
+                <>
+                    <Virtuoso
+                        totalCount={songs.length}
+                        customScrollParent={
+                            document.getElementById("scroll-container") ||
+                            undefined
+                        }
+                        increaseViewportBy={{ top: 0, bottom: 0 }}
+                        itemContent={(index) => (
                             <PlaylistSongsItem
-                                key={song.id}
-                                song={song}
+                                song={songs[index]}
                                 onPlayClick={onPlayClick}
                             />
-                        );
-                    })}
-                </div>
+                        )}
+                    />
+                </>
             )}
         </>
     );

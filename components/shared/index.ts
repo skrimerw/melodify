@@ -44,6 +44,7 @@ import LibraryArtistItem from "./LibraryArtistItem";
 import LibraryArtistItemSkeleton from "./LibraryArtistItemSkeleton";
 import AverageBgColorSetter from "./AverageBgColorSetter";
 import LanguagePopover from "./LanguagePopover";
+import Slider from "./Slider"
 
 export {
     Sidebar,
@@ -91,5 +92,6 @@ export {
     LibraryArtistItem,
     LibraryArtistItemSkeleton,
     AverageBgColorSetter,
-    LanguagePopover
+    LanguagePopover,
+    Slider
 };

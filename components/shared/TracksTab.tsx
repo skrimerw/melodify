@@ -1,8 +1,8 @@
 import { SearchResult, SongWithAlbumAndArtist } from "@/types";
 import React from "react";
-import PlaylistContext from "./PlaylistContext";
 import { nanoid } from "nanoid";
 import SearchNothingFound from "./SearchNothingFound";
+import VirtualizedPlaylistContext from "./VirtualizedPlaylistContext";
 
 interface Props {
     loading: boolean;
@@ -10,13 +10,13 @@ interface Props {
     className?: string;
 }
 
-export default function TracksTab({ songs, loading, className }: Props) {
+const TracksTab = React.memo(({ songs, loading, className }: Props) => {
     return (
         <>
             {songs?.length === 0 ? (
                 <SearchNothingFound />
             ) : (
-                <PlaylistContext
+                <VirtualizedPlaylistContext
                     className={className}
                     songs={songs as SongWithAlbumAndArtist[]}
                     loading={loading}
@@ -25,4 +25,6 @@ export default function TracksTab({ songs, loading, className }: Props) {
             )}
         </>
     );
-}
+});
+
+export default TracksTab;

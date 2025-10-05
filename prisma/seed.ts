@@ -1,6 +1,45 @@
 import { albums, artists, songs } from "./constants";
 import { prisma } from "./prisma-client";
 import bcrypt from "bcrypt";
+import { crawledMusic } from "./crawled-music";
+import path from "path";
+
+async function insertCrawledMusic() {
+    crawledMusic.forEach(async (music) => {
+        const beatles = await prisma.artist.create({
+            data: {
+                name: music.name,
+                heroImageUrl: music.imageUrl,
+            },
+        });
+
+        const albums = await prisma.album.createManyAndReturn({
+            data: music.albums.map((album) => ({
+                imageUrl: album.imageUrl,
+                releaseYear: Number(album.year),
+                title: album.title,
+                artistId: beatles.id,
+            })),
+        });
+
+        albums.forEach((album, i) => {
+            music.albums[i].tracks.forEach(async (track) => {
+                await prisma.song.create({
+                    data: {
+                        audioUrl: path
+                            .resolve(track.audioUrl)
+                            .replaceAll("\\", "/")
+                            .replaceAll("D:/Projects/music-crawler", ""),
+                        duration: Number(track.duration),
+                        title: track.title,
+                        albumId: album.id,
+                        artistId: beatles.id,
+                    },
+                });
+            });
+        });
+    });
+}
 
 async function up() {
     await prisma.user.createMany({
@@ -14,12 +53,12 @@ async function up() {
     });
 
     await prisma.artist.createMany({
-        data: artists
-    })
+        data: artists,
+    });
 
     await prisma.album.createMany({
-        data: albums
-    })
+        data: albums,
+    });
 
     songs.forEach(async (song) => {
         await prisma.song.create({
@@ -41,6 +80,7 @@ async function main() {
     try {
         await down();
         await up();
+        await insertCrawledMusic();
     } catch (e) {
         console.error(e);
     }

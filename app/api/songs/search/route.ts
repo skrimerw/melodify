@@ -53,7 +53,7 @@ export async function GET(req: NextRequest) {
                 album: true,
                 artist: true,
             },
-            take: 10,
+            take: 5,
         });
 
         const artists = await prisma.artist.findMany({

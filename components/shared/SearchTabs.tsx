@@ -126,20 +126,20 @@ export default function SearchTabs({ searchVal, className }: Props) {
                     );
                 })}
             </TabsList>
-            <div className="mt-5 h-full">
-                <TabsContent value="all" asChild>
+            <div className="mt-5 h-full flex flex-col">
+                <TabsContent value="all">
                     <AllTab searchResult={searchResult} loading={loading} />
                 </TabsContent>
-                <TabsContent value="artists" asChild>
+                <TabsContent value="artists">
                     <ArtistsTab
                         artists={searchResult.artists}
                         loading={loading}
                     />
                 </TabsContent>
-                <TabsContent value="tracks" asChild>
+                <TabsContent value="tracks">
                     <TracksTab songs={searchResult.songs} loading={loading} />
                 </TabsContent>
-                <TabsContent value="albums" asChild>
+                <TabsContent value="albums">
                     <AlbumsTab albums={searchResult.albums} loading={loading} />
                 </TabsContent>
             </div>

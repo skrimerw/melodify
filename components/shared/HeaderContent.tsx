@@ -75,7 +75,7 @@ export default function HeaderContent({ className, session }: Props) {
         >
             <div
                 className={cn(
-                    "absolute -z-1 inset-0 backdrop-blur-[10px] bg-card/10 transition-opacity duration-300 opacity-0",
+                    "absolute -z-1 inset-0 backdrop-blur-[10px] bg-card/10 transition-opacity duration-300 opacity-0 bg-gradient-to-b from-card to-transparent to-100%",
                     isBlury && "opacity-100"
                 )}
             ></div>
