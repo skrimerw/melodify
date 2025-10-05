@@ -43,7 +43,7 @@ export default function Slider({ title, slides }: Props) {
                     nextEl: `.slider-next-btn__${nextBtnId}`,
                     prevEl: `.slider-prev-btn__${prevBtnId}`,
                 }}
-                className="w-full z-0"
+                className="w-full !z-0"
             >
                 {slides.map((slide) => {
                     return <SwiperSlide>{slide}</SwiperSlide>;

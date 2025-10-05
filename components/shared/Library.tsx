@@ -27,7 +27,7 @@ export default function Library({ isLogged, className }: Props) {
     const library = useLibraryStore((state) => state.library);
 
     return (
-        <BoxWrapper className={cn("flex flex-col h-full p-0", className)}>
+        <BoxWrapper className={cn("relative [&>div]:flex [&>div]:flex-col h-full p-0", className)}>
             <header className="sticky top-0 z-20 bg-card flex items-center justify-between text-typography-gray px-6 py-5 border-b border-accent/60 mb-2">
                 <h3 className="flex gap-3 items-centery font-ys">
                     <TbPlaylist size={24} />
@@ -35,7 +35,7 @@ export default function Library({ isLogged, className }: Props) {
                 </h3>
             </header>
             {isLogged ? (
-                <div className="flex flex-col gap-4 px-6 pb-5 pt-0.5 h-full mt-1">
+                <div className="flex flex-col gap-4 px-6 pb-5 pt-0.5 mt-1 h-full">
                     {loading ? (
                         <>
                             {Array.from({ length: 3 }).map((_, i) => {
@@ -49,13 +49,13 @@ export default function Library({ isLogged, className }: Props) {
                         <>
                             {library?.pinnedAlbums?.length === 0 &&
                             library?.pinnedArtists?.length === 0 ? (
-                                <div className="text-typography-gray flex flex-col items-center my-auto">
+                                <div className="text-typography-gray flex flex-col items-center my-auto pb-[20%]">
                                     <Music
                                         className="text-typography-gray opacity-40"
                                         size={100}
                                         strokeWidth={1.2}
                                     />
-                                    <p className="opacity-50">Empty library</p>
+                                    <p className="opacity-50">{t("empty")}</p>
                                 </div>
                             ) : (
                                 <>
@@ -111,7 +111,7 @@ export default function Library({ isLogged, className }: Props) {
                     </div>
                 </div>
             )}
-            <div className="p-2 h-full flex flex-col">
+            <div className="p-2 h-fit mt-auto flex flex-col sticky bottom-0">
                 <LanguagePopover />
             </div>
         </BoxWrapper>

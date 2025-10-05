@@ -59,7 +59,7 @@ export default function HeaderContent({ className, session }: Props) {
 
   useEffect(() => {
     document
-      .querySelector(".main-container")
+      .querySelector(".main-container>div[data-overlayscrollbars-contents]")
       ?.addEventListener("scroll", onScroll);
   }, []);
 

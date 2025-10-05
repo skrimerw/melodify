@@ -145,19 +145,8 @@
     gap: 12px;
 }
 
-.box-wrapper-scrollbar::-webkit-scrollbar {
-    width: 0px;
-}
-.box-wrapper-scrollbar::-webkit-scrollbar-track {
-    background-color: transparent;
-}
-.box-wrapper-scrollbar::-webkit-scrollbar-thumb {
-    background-color: rgba(128, 128, 128, 0.319);
-    border-radius: 18px;
-}
-
-.box-wrapper-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(128, 128, 128, 0.6);
+.box-wrapper-scrollbar div[data-overlayscrollbars-contents] {
+    width: 5px;
 }
 
 .library-header-shadow {
@@ -171,3 +160,11 @@ input:-webkit-autofill:focus {
 input[data-autocompleted] {
     background-color: transparent !important;
 }
+
+/* .os-scrollbar-handle {
+    background-color: #333 !important;
+} */
+
+/* .os-scrollbar-handle:hover {
+    background-color: #333333aa !important;
+} */

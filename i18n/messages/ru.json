@@ -75,6 +75,10 @@
         "pageTitle": "Подтверждение email",
         "confirmLater": "Подтвердить позже"
     },
+    "NotFoundPage": {
+        "title": "Страница не найдена",
+        "description": "Кажется, мы не можем найти страницу, которую вы ищете"
+    },
     "Search": {
         "inputPlaceholder": "Что вы хотите найти?"
     },
@@ -84,6 +88,7 @@
     },
     "Library": {
         "title": "Ваша медиатека",
+        "empty": "Здесь пусто",
         "PlaylistNotification": {
             "title": "Создай свой первый плейлист",
             "description": "Это совсем не сложно! Мы поможем."

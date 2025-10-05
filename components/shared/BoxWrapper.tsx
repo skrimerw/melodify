@@ -1,5 +1,8 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import React, { CSSProperties } from "react";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 
 interface Props {
     id?: string;
@@ -10,15 +13,16 @@ interface Props {
 
 export default function BoxWrapper({ id, children, className, style }: Props) {
     return (
-        <div
+        <OverlayScrollbarsComponent
             id={id}
             className={cn(
-                "bg-card rounded-lg px-6 py-4 box-wrapper-scrollbar border border-typography-gray/5",
+                "relative bg-card rounded-lg px-6 py-4 box-wrapper-scrollbar border border-typography-gray/5",
                 className
             )}
+            options={{ scrollbars: { autoHide: "scroll" } }}
             style={style}
         >
             {children}
-        </div>
+        </OverlayScrollbarsComponent>
     );
 }

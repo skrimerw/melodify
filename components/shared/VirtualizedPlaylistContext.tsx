@@ -35,8 +35,9 @@ export default function VirtualizedPlaylistContext({
                     <Virtuoso
                         totalCount={songs.length}
                         customScrollParent={
-                            document.getElementById("scroll-container") ||
-                            undefined
+                            document.querySelector<HTMLElement>(
+                                "#scroll-container>div[data-overlayscrollbars-contents]"
+                            ) || undefined
                         }
                         increaseViewportBy={{ top: 0, bottom: 0 }}
                         itemContent={(index) => (

@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import { FavoriteLink, NewestSongsContainer } from "@/components/shared";
+import ScrollTop from "@/components/shared/ScrollTop";
 import { prisma } from "@/prisma/prisma-client";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -31,8 +32,9 @@ export default async function Page() {
 
     return (
         <div>
-            {session?.user && likedSongs && <FavoriteLink className="mb-8" />}
+            {session?.user && <FavoriteLink className="mb-8" />}
             <div>
+                <ScrollTop />
                 <h2 className="overlayed-heading text-xl mb-5">{t("title")}</h2>
                 <NewestSongsContainer songs={songs} />
             </div>

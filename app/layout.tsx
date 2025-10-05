@@ -1,9 +1,9 @@
 import "./globals.css";
+import "overlayscrollbars/overlayscrollbars.css";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "react-hot-toast";
 import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
-import { cookies } from "next/headers";
 import { getLocale } from "next-intl/server";
 
 const YSFont = localFont({
