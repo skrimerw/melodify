@@ -161,10 +161,10 @@ input[data-autocompleted] {
     background-color: transparent !important;
 }
 
-/* .os-scrollbar-handle {
-    background-color: #333 !important;
-} */
+.os-scrollbar-handle {
+    background-color: #414141 !important;
+}
 
-/* .os-scrollbar-handle:hover {
-    background-color: #333333aa !important;
-} */
+.os-scrollbar-handle:hover {
+    background-color: #363636 !important;
+}

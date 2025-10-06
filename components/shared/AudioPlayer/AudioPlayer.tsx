@@ -53,8 +53,8 @@ export default function AudioPlayer({ className }: Props) {
                         )}
                     >
                         <ProgressBar />
-                        <BoxWrapper
-                            className={cn("p-2 pr-6 transition-colors")}
+                        <div
+                            className={cn("rounded-sm border border-white/5 p-2 pr-6 transition-colors !overflow-visible")}
                             style={{
                                 backgroundColor: avgColor + "40",
                             }}
@@ -64,7 +64,7 @@ export default function AudioPlayer({ className }: Props) {
                                 <Controls className="absolute left-1/2 -translate-x-1/2" />
                                 <VolumeControl />
                             </div>
-                        </BoxWrapper>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>

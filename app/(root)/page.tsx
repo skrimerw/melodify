@@ -32,7 +32,7 @@ export default async function Page() {
 
     return (
         <div>
-            {session?.user && <FavoriteLink className="mb-8" />}
+            {session?.user && <FavoriteLink isEmpty={!!!likedSongs} className="mb-8" />}
             <div>
                 <ScrollTop />
                 <h2 className="overlayed-heading text-xl mb-5">{t("title")}</h2>

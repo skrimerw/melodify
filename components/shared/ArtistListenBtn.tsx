@@ -7,6 +7,7 @@ import { useAudioPlayer } from "@/store/use-audio-player";
 import { cn } from "@/lib/utils";
 import { SongWithAlbumAndArtist } from "@/types";
 import { Artist } from "@prisma/client";
+import { useTranslations } from "next-intl";
 
 interface Props {
   artist: Artist;
@@ -22,6 +23,7 @@ export default function ArtistListenBtn({ songs, className, artist }: Props) {
   const isPaused = useAudioPlayer((state) => state.isPaused);
   const currentQueueId = useAudioPlayer((state) => state.queueId);
   const queueId = `${artist.name.toLowerCase()}.popular`;
+  const t = useTranslations("common.names");
 
   function handlePause() {
     if (queueId !== currentQueueId) {
@@ -54,7 +56,7 @@ export default function ArtistListenBtn({ songs, className, artist }: Props) {
       ) : (
         <FaPause className="!size-3.5" />
       )}
-      Listen
+      {t("listen")}
     </Button>
   );
 }

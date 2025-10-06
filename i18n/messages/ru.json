@@ -1,114 +1,121 @@
 {
-    "common": {
-        "Login": "Войти",
-        "Signup": "Зарегистрироваться",
-        "Logout": "Выйти",
-        "SigninWith": "Войти через {provider}",
-        "Confirm": "Подтвердить",
-        "names": {
-            "all": "Все",
-            "album": "{count, plural, one {Альбом} other {Альбомы}}",
-            "artist": "{count, plural, one {Исполнитель} other {Исполнители}}",
-            "track": "{count, plural, one {Трек} other {Треки}}",
-            "playlist": "{count, plural, one {Плейлист} other {Плейлисты}}",
-            "popularSongs": "Популярные песни",
-            "or": "или",
-            "listen": "Слушать"
-        },
-        "inputs": {
-            "email": {
-                "label": "Email",
-                "placeholder": "Введите email",
-                "errorMessages": {
-                    "nonempty": "Введите ваш email",
-                    "email": "Введите корректный email (например, example@test.com)"
-                }
-            },
-            "password": {
-                "label": "Пароль",
-                "placeholder": "Введите пароль",
-                "errorMessages": {
-                    "nonempty": "Введите ваше пароль"
-                }
-            },
-            "username": {
-                "label": "Имя пользователя",
-                "placeholder": "Введите имя пользователя",
-                "errorMessages": {
-                    "nonempty": "Введите ваше имя пользователя"
-                }
-            }
-        },
-        "timeUnits": {
-            "minutes": "мин",
-            "seconds": "сек"
-        }
+  "common": {
+    "Login": "Войти",
+    "Signup": "Зарегистрироваться",
+    "Logout": "Выйти",
+    "SigninWith": "Войти через {provider}",
+    "Confirm": "Подтвердить",
+    "names": {
+      "all": "Все",
+      "album": "{count, plural, one {Альбом} other {Альбомы}}",
+      "artist": "{count, plural, one {Исполнитель} other {Исполнители}}",
+      "track": "{count, plural, one {Трек} other {Треки}}",
+      "playlist": "{count, plural, one {Плейлист} other {Плейлисты}}",
+      "popularSongs": "Популярные песни",
+      "or": "или",
+      "listen": "Слушать"
     },
-    "HomePage": {
-        "pageTitle": "Главная",
-        "title": "Новые песни"
-    },
-    "SearchPage": {
-        "pageTitle": "Поиск",
-        "title": "Поиск"
-    },
-    "LoginPage": {
-        "pageTitle": "Вход",
-        "title": "Войти в Melodify",
-        "proposition": "Еще нет аккаунта?",
+    "inputs": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Введите email",
         "errorMessages": {
-            "somethingWentWrong": "Что-то пошло не так"
+          "nonempty": "Введите ваш email",
+          "email": "Введите корректный email (например, example@test.com)"
         }
-    },
-    "SignupPage": {
-        "pageTitle": "Регистрация",
-        "title": "Зарегистрироваться в Melodify",
-        "proposition": "Уже есть аккаунт?"
-    },
-    "ProfilePage": {
-        "pageTitle": "Профиль"
-    },
-    "FavoritePage": {
-        "pageTitle": "Любимые песни"
-    },
-    "VerifyEmailPage": {
-        "pageTitle": "Подтверждение email",
-        "confirmLater": "Подтвердить позже"
-    },
-    "NotFoundPage": {
-        "title": "Страница не найдена",
-        "description": "Кажется, мы не можем найти страницу, которую вы ищете"
-    },
-    "Search": {
-        "inputPlaceholder": "Что вы хотите найти?"
-    },
-    "Navigation": {
-        "home": "Главная",
-        "search": "Поиск"
-    },
-    "Library": {
-        "title": "Ваша медиатека",
-        "empty": "Здесь пусто",
-        "PlaylistNotification": {
-            "title": "Создай свой первый плейлист",
-            "description": "Это совсем не сложно! Мы поможем."
+      },
+      "password": {
+        "label": "Пароль",
+        "placeholder": "Введите пароль",
+        "errorMessages": {
+          "nonempty": "Введите ваше пароль"
         }
+      },
+      "username": {
+        "label": "Имя пользователя",
+        "placeholder": "Введите имя пользователя",
+        "errorMessages": {
+          "nonempty": "Введите ваше имя пользователя"
+        }
+      }
     },
-    "FormProfile": {
-        "title": "Профиль",
-        "isVerified": "ваш email подтвержден",
-        "isNotVerified": "подтвердите ваш email",
-        "updateInfo": "Обновить профиль"
+    "timeUnits": {
+      "minutes": "мин",
+      "seconds": "сек"
     },
-    "VerificationDialog": {
-        "title": "Подтвердите ваш email"
-    },
-    "VerificationCode": {
-        "title": "Пожалуйста, введите код, отправленный на ваш email",
-        "description": "Подтвердите ваш email, чтобы обезопасить ваш аккаунт и восстановить доступ, если вы забудете пароль."
-    },
-    "FavoriteLink": {
-        "title": "Добро пожаловать",
-        "description": "Любимые песни"
+    "toasts": {
+      "artistPin": "Исполнитель \"{name}\" добавлен в вашу медиатеку",
+      "artistUnpin": "Исполнитель \"{name}\" удален из вашей медиатеки",
+      "error": "Что-то пошло не так",
+      "albumPin": "Альбом \"{title}\" добавлен в вашу медиатеку",
+      "albumUnpin": "Альбом \"{title}\" удален из вашей медиатеки"
     }
+  },
+  "HomePage": {
+    "pageTitle": "Главная",
+    "title": "Новые песни"
+  },
+  "SearchPage": {
+    "pageTitle": "Поиск",
+    "title": "Поиск"
+  },
+  "LoginPage": {
+    "pageTitle": "Вход",
+    "title": "Войти в Melodify",
+    "proposition": "Еще нет аккаунта?",
+    "errorMessages": {
+      "somethingWentWrong": "Что-то пошло не так"
+    }
+  },
+  "SignupPage": {
+    "pageTitle": "Регистрация",
+    "title": "Зарегистрироваться в Melodify",
+    "proposition": "Уже есть аккаунт?"
+  },
+  "ProfilePage": {
+    "pageTitle": "Профиль"
+  },
+  "FavoritePage": {
+    "pageTitle": "Любимые песни"
+  },
+  "VerifyEmailPage": {
+    "pageTitle": "Подтверждение email",
+    "confirmLater": "Подтвердить позже"
+  },
+  "NotFoundPage": {
+    "title": "Страница не найдена",
+    "description": "Кажется, мы не можем найти страницу, которую вы ищете"
+  },
+  "Search": {
+    "inputPlaceholder": "Что вы хотите найти?"
+  },
+  "Navigation": {
+    "home": "Главная",
+    "search": "Поиск"
+  },
+  "Library": {
+    "title": "Ваша медиатека",
+    "empty": "Здесь пусто",
+    "PlaylistNotification": {
+      "title": "Создай свой первый плейлист",
+      "description": "Это совсем не сложно! Мы поможем."
+    }
+  },
+  "FormProfile": {
+    "title": "Профиль",
+    "isVerified": "ваш email подтвержден",
+    "isNotVerified": "подтвердите ваш email",
+    "updateInfo": "Обновить профиль"
+  },
+  "VerificationDialog": {
+    "title": "Подтвердите ваш email"
+  },
+  "VerificationCode": {
+    "title": "Пожалуйста, введите код, отправленный на ваш email",
+    "description": "Подтвердите ваш email, чтобы обезопасить ваш аккаунт и восстановить доступ, если вы забудете пароль."
+  },
+  "FavoriteLink": {
+    "title": "Добро пожаловать",
+    "description": "Любимые песни"
+  }
 }
