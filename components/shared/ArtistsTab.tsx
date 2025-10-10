@@ -24,7 +24,7 @@ const ArtistsTab = React.memo(({ loading, artists, className }: Props) => {
                           })
                         : artists?.map((artist) => {
                               return (
-                                  <ArtistCard key={artist.id} artist={artist} />
+                                  <ArtistCard key={artist.id} artist={artist} isPinned={(artist as any).pinnedBy.length > 0} />
                               );
                           })}
                 </div>

@@ -29,6 +29,7 @@ const AlbumsTab = React.memo(({ albums, loading, className }: Props) => {
                                       album={album}
                                       artist={album.artist}
                                       songs={album.songs}
+                                      isPinned={(album as any).pinnedBy.length > 0}
                                   />
                               );
                           })}

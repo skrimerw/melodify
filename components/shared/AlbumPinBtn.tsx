@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { useLibraryStore } from "@/store/use-library-store";
 import { Album, Prisma } from "@prisma/client";
 import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 
 interface Props {
   album: Prisma.AlbumGetPayload<{
@@ -17,9 +18,14 @@ interface Props {
     };
   }>;
   isInitiallyPinned: boolean;
+  className?: string;
 }
 
-export default function AlbumPinBtn({ album, isInitiallyPinned }: Props) {
+export default function AlbumPinBtn({
+  album,
+  isInitiallyPinned,
+  className,
+}: Props) {
   const [isPinned, setIsPinned] = useState(isInitiallyPinned);
   const [loading, setLoading] = useState(false);
 
@@ -60,7 +66,7 @@ export default function AlbumPinBtn({ album, isInitiallyPinned }: Props) {
   return (
     <Button
       onClick={handleClick}
-      className="!p-0 size-10"
+      className={cn("!p-0 size-10",className)}
       variant="secondary"
       disabled={loading}
     >

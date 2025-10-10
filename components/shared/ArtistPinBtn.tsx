@@ -8,6 +8,7 @@ import { followArtist, unfollowArtist } from "@/actions/artist-follow";
 import { useLibraryStore } from "@/store/use-library-store";
 import { Prisma } from "@prisma/client";
 import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 
 interface Props {
   artist: Prisma.ArtistGetPayload<{
@@ -31,9 +32,10 @@ interface Props {
     };
   }>;
   isInitiallyPinned: boolean;
+  className?: string
 }
 
-export default function ArtistPinBtn({ artist, isInitiallyPinned }: Props) {
+export default function ArtistPinBtn({ artist, isInitiallyPinned, className }: Props) {
   const [isPinned, setIsPinned] = useState(isInitiallyPinned);
   const [loading, setLoading] = useState(false);
 
@@ -75,7 +77,7 @@ export default function ArtistPinBtn({ artist, isInitiallyPinned }: Props) {
   return (
     <Button
       onClick={handleClick}
-      className="!p-0 size-10"
+      className={cn("!p-0 size-10", className)}
       variant="secondary"
       disabled={loading}
     >
