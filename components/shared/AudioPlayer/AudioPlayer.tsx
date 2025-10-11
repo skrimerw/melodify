@@ -10,6 +10,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import BoxWrapper from "../BoxWrapper";
 import { FastAverageColor } from "fast-average-color";
 import { useAudioPlayer } from "@/store/use-audio-player";
+import { FaListUl } from "react-icons/fa6";
+import QueueDrawer from "../QueueDrawer";
 
 interface Props {
     className?: string;
@@ -62,6 +64,7 @@ export default function AudioPlayer({ className }: Props) {
                             <div className="flex justify-between items-center">
                                 <ActiveSong />
                                 <Controls className="absolute left-1/2 -translate-x-1/2" />
+                                <QueueDrawer className="ml-auto mr-0" />
                                 <VolumeControl />
                             </div>
                         </div>

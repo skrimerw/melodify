@@ -27,7 +27,7 @@ export default function PlaylistContext({
     };
 
     return (
-        <>
+        <div className={className}>
             {loading && <PlaylistLoadingSkeleton length={5} />}
             {!loading && songs?.length && (
                 <div className="flex flex-col">
@@ -42,6 +42,6 @@ export default function PlaylistContext({
                     })}
                 </div>
             )}
-        </>
+        </div>
     );
 }

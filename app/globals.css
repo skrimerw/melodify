@@ -145,8 +145,8 @@
     gap: 12px;
 }
 
-.box-wrapper-scrollbar div[data-overlayscrollbars-contents] {
-    width: 5px;
+.invisible-scrollbar::-webkit-scrollbar {
+    width: 0px;
 }
 
 .library-header-shadow {
@@ -167,4 +167,28 @@ input[data-autocompleted] {
 
 .os-scrollbar-handle:hover {
     background-color: #363636 !important;
+}
+
+.queue-track-list {
+    position: relative;
+}
+
+.queue-track-list::before {
+    content: "";
+    position: absolute;
+    top: 40px;
+    display: block;
+    width: 100%;
+    height: 60px;
+    background-image: linear-gradient(180deg, hsl(201, 43.3%, 20%) 0, hsla(0, 0%, 5%, 0) 100%);
+    z-index: 10;
+}
+.queue-track-list::after {
+    content: "";
+    position: absolute;
+    bottom: 40px;
+    display: block;
+    width: 100%;
+    height: 60px;
+    background-image: linear-gradient(1turn, hsl(201, 43.3%, 20%) 0, hsla(0, 0%, 5%, 0) 100%);
 }
