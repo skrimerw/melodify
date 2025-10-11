@@ -10,104 +10,145 @@ import { useAudioPlayer } from "@/store/use-audio-player";
 import { cn } from "@/lib/utils";
 import { SongWithAlbumAndArtist } from "@/types";
 import { useTranslations } from "next-intl";
+import { EllipsisVertical, PinOff } from "lucide-react";
+import { RiUnpinLine } from "react-icons/ri";
+import { unpinAlbum } from "@/actions/album-pin";
+import { useLibraryStore } from "@/store/use-library-store";
+import { useRouter } from "next/navigation";
 
 interface Props {
-    album: Album;
-    songs: SongWithAlbumAndArtist[];
-    authorName: string;
-    authorId: number;
+  album: Album;
+  songs: SongWithAlbumAndArtist[];
+  authorName: string;
+  authorId: number;
 }
 
 export default function LibraryAlbumItem({
-    album: { id, imageUrl, title },
-    authorName,
-    authorId,
-    songs,
+  album: { id, imageUrl, title },
+  authorName,
+  authorId,
+  songs,
 }: Props) {
-    const t = useTranslations("common.names");
-    const isPaused = useAudioPlayer((state) => state.isPaused);
-    const play = useAudioPlayer((state) => state.play);
-    const pause = useAudioPlayer((state) => state.pause);
-    const setQueue = useAudioPlayer((state) => state.setQueue);
-    const setQueueId = useAudioPlayer((state) => state.setQueueId);
-    const currentQueueId = useAudioPlayer((state) => state.queueId);
-    const queueId = `${authorName.toLowerCase()}.album.${title.toLowerCase()}`;
+  const t = useTranslations("common.names");
+  const isPaused = useAudioPlayer((state) => state.isPaused);
+  const play = useAudioPlayer((state) => state.play);
+  const pause = useAudioPlayer((state) => state.pause);
+  const setQueue = useAudioPlayer((state) => state.setQueue);
+  const setQueueId = useAudioPlayer((state) => state.setQueueId);
+  const currentQueueId = useAudioPlayer((state) => state.queueId);
+  const queueId = `${authorName.toLowerCase()}.album.${title.toLowerCase()}`;
+  const setLibrary = useLibraryStore((state) => state.setLibrary);
+  const library = useLibraryStore((state) => state.library);
+  const router = useRouter();
 
-    const handleClick = () => {
-        if (queueId !== currentQueueId) {
-            play(songs[0]);
-            setQueue(songs);
-            setQueueId(queueId);
-        } else {
-            if (isPaused) {
-                play();
-            } else {
-                pause();
-            }
-        }
-    };
+  const handleClick = () => {
+    if (queueId !== currentQueueId) {
+      play(songs[0]);
+      setQueue(songs);
+      setQueueId(queueId);
+    } else {
+      if (isPaused) {
+        play();
+      } else {
+        pause();
+      }
+    }
+  };
 
-    return (
-        <div className="group flex items-center gap-3 text-sm cursor-pointer hover:bg-white/3 rounded-sm p-1.5 -m-1.5">
-            <div className="relative h-[50px] w-[50px] rounded-sm overflow-hidden flex-none">
-                {!isPaused && currentQueueId === queueId && (
-                    <motion.div
-                        animate={{ scale: [1, 1.8, 1] }}
-                        transition={{
-                            duration: 0.8,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                        }}
-                        className="absolute top-1/2 left-1/2 -translate-1/2 size-3 rounded-full bg-btn-primary group-hover:hidden"
-                    ></motion.div>
-                )}
-                <img
-                    src={imageUrl}
-                    alt="Album cover"
-                    className="object-cover select-none size-full"
-                />
-                <div
-                    className={cn(
-                        "transition-all duration-200 group-hover:opacity-100 opacity-0 absolute h-[calc(100%+10px)] w-[calc(100%+10px)] top-1/2 left-1/2 -translate-1/2 flex items-center justify-center bg-black/35",
-                        isPaused && currentQueueId === queueId && "opacity-100"
-                    )}
-                >
-                    <motion.div
-                        onClick={handleClick}
-                        whileTap={{
-                            scale: 0.99,
-                        }}
-                        whileHover={{
-                            scale: 1.05,
-                        }}
-                        className={cn(
-                            "transition-[top] duration-200 group-hover:top-1/2 absolute top-[calc(50%+8px)] left-1/2 -translate-y-1/2 -translate-x-1/2 h-8 w-8 rounded-full bg-btn-primary text-background flex items-center justify-center text-base",
-                            isPaused && currentQueueId === queueId && "top-1/2"
-                        )}
-                    >
-                        {!isPaused && currentQueueId === queueId ? (
-                            <FaPause />
-                        ) : (
-                            <FaPlay className="ml-0.5" />
-                        )}
-                    </motion.div>
-                </div>
-            </div>
-            <div className="flex flex-col gap-1">
-                <Link href={`/album/${id}`} className="font-ys hover:underline">
-                    {title}
-                </Link>
-                <p className="text-typography-gray">
-                    {t("album", {count:1})}
-                    <SeparationDot />
-                    <Link
-                        href={`/artist/${authorId}`}
-                        className="transition-colors hover:text-primary"
-                    >
-                        {authorName}
-                    </Link>
-                </p>
-            </div>
+  return (
+    <div
+      onClick={() => {
+        router.push(`/album/${id}`);
+      }}
+      className="group flex items-center gap-3 text-sm cursor-pointer hover:bg-white/3 rounded-sm p-1.5 -m-1.5"
+    >
+      <div className="relative h-[50px] w-[50px] rounded-sm overflow-hidden flex-none">
+        {!isPaused && currentQueueId === queueId && (
+          <motion.div
+            animate={{ scale: [1, 1.8, 1] }}
+            transition={{
+              duration: 0.8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute top-1/2 left-1/2 -translate-1/2 size-3 rounded-full bg-btn-primary group-hover:hidden"
+          ></motion.div>
+        )}
+        <img
+          src={imageUrl}
+          alt="Album cover"
+          className="object-cover select-none size-full"
+        />
+        <div
+          className={cn(
+            "transition-all duration-200 group-hover:opacity-100 opacity-0 absolute h-[calc(100%+10px)] w-[calc(100%+10px)] top-1/2 left-1/2 -translate-1/2 flex items-center justify-center bg-black/35",
+            isPaused && currentQueueId === queueId && "opacity-100"
+          )}
+        >
+          <motion.div
+            onClick={(e) => {
+              e.stopPropagation();
+              handleClick();
+            }}
+            whileTap={{
+              scale: 0.99,
+            }}
+            whileHover={{
+              scale: 1.05,
+            }}
+            className={cn(
+              "transition-[top] duration-200 group-hover:top-1/2 absolute top-[calc(50%+8px)] left-1/2 -translate-y-1/2 -translate-x-1/2 h-8 w-8 rounded-full bg-btn-primary text-background flex items-center justify-center text-base",
+              isPaused && currentQueueId === queueId && "top-1/2"
+            )}
+          >
+            {!isPaused && currentQueueId === queueId ? (
+              <FaPause />
+            ) : (
+              <FaPlay className="ml-0.5" />
+            )}
+          </motion.div>
         </div>
-    );
+      </div>
+      <div className="flex flex-col gap-1">
+        <Link href={`/album/${id}`} className="font-ys hover:underline w-fit">
+          {title}
+        </Link>
+        <p
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          className="text-typography-gray"
+        >
+          {t("album", { count: 1 })}
+          <SeparationDot />
+          <Link
+            href={`/artist/${authorId}`}
+            className="transition-colors hover:text-primary"
+          >
+            {authorName}
+          </Link>
+        </p>
+      </div>
+
+      <RiUnpinLine
+        onClick={async (e) => {
+          e.stopPropagation();
+          try {
+            await unpinAlbum(id);
+            setLibrary({
+              pinnedArtists: library?.pinnedArtists,
+              pinnedAlbums: library?.pinnedAlbums?.filter(
+                (album) => album.id !== id
+              ),
+            });
+          } catch (e) {
+            console.log(e);
+          }
+        }}
+        title="Unpin album"
+        size={20}
+        className="opacity-0 group-hover:opacity-100 ml-auto text-typography-gray transition-colors duration-200 hover:text-primary"
+      />
+    </div>
+  );
 }

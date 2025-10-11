@@ -1214,6 +1214,98 @@ export const crawledMusic = [
             },
             {
                 imageUrl:
+                    "https://avatars.yandex.net/get-music-content/192707/9908b7fe.a.3277323-2/300x300",
+                title: "Rubber Soul",
+                year: "1965",
+                tracks: [
+                    {
+                        title: "Drive My Car",
+                        duration: 148,
+                        audioUrl:
+                            "/downloads/The Beatles/Rubber_Soul/Drive My Car.mp3",
+                    },
+                    {
+                        title: "Girl",
+                        duration: 151,
+                        audioUrl:
+                            "/downloads/The Beatles/Rubber_Soul/Girl.mp3",
+                    },
+                    {
+                        title: "I'm Looking Through You",
+                        duration: 146,
+                        audioUrl:
+                            "/downloads/The Beatles/Rubber_Soul/I'm Looking Through You.mp3",
+                    },
+                    {
+                        title: "If I Needed Someone",
+                        duration: 142,
+                        audioUrl:
+                            "/downloads/The Beatles/Rubber_Soul/If I Needed Someone .mp3",
+                    },
+                    {
+                        title: "In My Life",
+                        duration: 147,
+                        audioUrl:
+                            "/downloads/The Beatles/Rubber_Soul/In My Life .mp3",
+                    },
+                    {
+                        title: "Michelle",
+                        duration: 162,
+                        audioUrl:
+                            "/downloads/The Beatles/Rubber_Soul/Michelle.mp3",
+                    },
+                    {
+                        title: "Norwegian Wood (This Bird Has Flown)",
+                        duration: 125,
+                        audioUrl:
+                            "/downloads/The Beatles/Rubber_Soul/Norwegian Wood (This Bird Has Flown).mp3",
+                    },
+                    {
+                        title: "Nowhere Man",
+                        duration: 164,
+                        audioUrl:
+                            "/downloads/The Beatles/Rubber_Soul/Nowhere Man.mp3",
+                    },
+                    {
+                        title: "Run For Your Life",
+                        duration: 141,
+                        audioUrl:
+                            "/downloads/The Beatles/Rubber_Soul/Run For Your Life .mp3",
+                    },
+                    {
+                        title: "The Word",
+                        duration: 163,
+                        audioUrl:
+                            "/downloads/The Beatles/Rubber_Soul/The Word.mp3",
+                    },
+                    {
+                        title: "Think For Yourself",
+                        duration: 138,
+                        audioUrl:
+                            "/downloads/The Beatles/Rubber_Soul/Think For Yourself .mp3",
+                    },
+                    {
+                        title: "Wait",
+                        duration: 134,
+                        audioUrl:
+                            "/downloads/The Beatles/Rubber_Soul/Wait .mp3",
+                    },
+                    {
+                        title: "What Goes On",
+                        duration: 170,
+                        audioUrl:
+                            "/downloads/The Beatles/Rubber_Soul/What Goes On.mp3",
+                    },
+                    {
+                        title: "You Won't See Me",
+                        duration: 200,
+                        audioUrl:
+                            "/downloads/The Beatles/Rubber_Soul/You Won't See Me .mp3",
+                    },
+                ],
+            },
+            {
+                imageUrl:
                     "https://avatars.yandex.net/get-music-content/143117/9344c1b7.a.3277248-2/300x300",
                 title: "Help!",
                 year: "1965",
