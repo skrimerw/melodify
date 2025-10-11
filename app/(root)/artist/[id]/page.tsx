@@ -45,6 +45,8 @@ export default async function ArtistPage({ params }: Props) {
         notFound();
     }
 
+    const session = await auth();
+
     const artist = await prisma.artist.findFirst({
         where: {
             id: Number(id),
@@ -65,6 +67,11 @@ export default async function ArtistPage({ params }: Props) {
                             artist: true,
                         },
                     },
+                    pinnedBy: {
+                        where: {
+                            userId: session?.user.id
+                        }
+                    }
                 },
             },
         },
@@ -73,8 +80,6 @@ export default async function ArtistPage({ params }: Props) {
     if (!artist) {
         notFound();
     }
-
-    const session = await auth();
 
     const isPinned = await prisma.artistsPinned.findFirst({
         where: {
@@ -137,6 +142,7 @@ export default async function ArtistPage({ params }: Props) {
                                     songs={album.songs}
                                     album={album}
                                     artist={artist}
+                                    isPinned={album.pinnedBy.length > 0}
                                 />
                             );
                         })}
