@@ -1,6 +1,5 @@
 import { auth } from "@/auth";
 import { FavoriteLink, NewestSongsContainer } from "@/components/shared";
-import QueueDrawer from "@/components/shared/QueueDrawer";
 import ScrollTop from "@/components/shared/ScrollTop";
 import { prisma } from "@/prisma/prisma-client";
 import { Metadata } from "next";
@@ -35,7 +34,6 @@ export default async function Page() {
         <div>
             {session?.user && <FavoriteLink isEmpty={!!!likedSongs} className="mb-8" />}
             <div>
-                <QueueDrawer />
                 <ScrollTop />
                 <h2 className="overlayed-heading text-xl mb-5">{t("title")}</h2>
                 <NewestSongsContainer songs={songs} />
