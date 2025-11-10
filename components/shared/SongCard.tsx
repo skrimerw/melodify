@@ -67,7 +67,7 @@ export function SongCard({ song, onPlayClick }: Props) {
                     )}
                 >
                     <LikeBtn
-                        className="[&>.heart-filled]:text-primary flex items-center justify-center rounded-full transition-[translate,opacity] duration-[400ms] opacity-0 group-hover:-translate-y-10 group-hover:opacity-100 absolute ease-out -bottom-[calc(22px)] left-4 size-10 bg-[rgba(26,26,26,.9)] hover:bg-[rgba(51,51,51,.9)]"
+                        className="[&>.heart-outline]:text-primary [&>.heart-filled]:text-white [&>.heart-filled]:hover:opacity-100  flex items-center justify-center rounded-full transition-[translate,opacity] duration-[400ms] opacity-0 group-hover:-translate-y-10 group-hover:opacity-100 absolute ease-out -bottom-[calc(22px)] left-4 size-10 bg-[rgba(26,26,26,.9)] hover:bg-[rgba(51,51,51,.9)]"
                         song={song}
                     />
                     <motion.div

@@ -106,7 +106,7 @@ export default function PlaylistSongsItem({
           </Link>
           <Link
             href={`/artist/${artistId}`}
-            className="text-typography-gray transition-all hover:text-primary"
+            className="text-primary/60 transition-all hover:text-primary"
           >
             {authorName}
           </Link>
