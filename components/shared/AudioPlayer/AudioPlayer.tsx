@@ -7,70 +7,73 @@ import Controls from "./Controls";
 import VolumeControl from "./VolumeControl";
 import ProgressBar from "./ProgressBar";
 import { motion, AnimatePresence } from "framer-motion";
-import BoxWrapper from "../BoxWrapper";
 import { FastAverageColor } from "fast-average-color";
 import { useAudioPlayer } from "@/store/use-audio-player";
 import { FaListUl } from "react-icons/fa6";
 import QueueDrawer from "../QueueDrawer";
+import { useFullScreenPlayer } from "@/store/use-fullscreen-player";
 
 interface Props {
-    className?: string;
+  className?: string;
 }
 
 export default function AudioPlayer({ className }: Props) {
-    const song = useAudioPlayer((state) => state.currentSong);
-    const [avgColor, setAvgColor] = useState("");
+  const song = useAudioPlayer((state) => state.currentSong);
+  const [avgColor, setAvgColor] = useState("");
+  const setIsVisible = useFullScreenPlayer((state) => state.setIsOpen);
 
-    async function getAvgColor() {
-        const fac = new FastAverageColor();
+  async function getAvgColor() {
+    const fac = new FastAverageColor();
 
-        if (song) {
-            const { hex } = await fac.getColorAsync(song?.album.imageUrl);
+    if (song) {
+      const { hex } = await fac.getColorAsync(song?.album.imageUrl);
 
-            setAvgColor(hex);
-        }
+      setAvgColor(hex);
     }
+  }
 
-    useEffect(() => {
-        getAvgColor();
-    }, [song?.id]);
+  useEffect(() => {
+    getAvgColor();
+  }, [song?.id]);
 
-    return (
-        <>
-            <AnimatePresence initial={false}>
-                {song && (
-                    <motion.div
-                        initial={{
-                            height: 0,
-                        }}
-                        animate={{
-                            height: "auto",
-                        }}
-                        exit={{
-                            height: 0,
-                        }}
-                        className={cn(
-                            "relative flex flex-col gap-1",
-                            className
-                        )}
-                    >
-                        <ProgressBar />
-                        <div
-                            className={cn("rounded-sm border border-white/5 p-2 pr-6 transition-colors !overflow-visible")}
-                            style={{
-                                backgroundColor: avgColor + "40",
-                            }}
-                        >
-                            <div className="flex justify-between items-center">
-                                <ActiveSong />
-                                <Controls className="absolute left-1/2 -translate-x-1/2" />
-                                <QueueDrawer className="ml-auto mr-0" />
-                                <VolumeControl />
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </>
-    );
+  return (
+    <AnimatePresence initial={false}>
+      {song && (
+        <motion.div
+          initial={{
+            height: 0,
+          }}
+          animate={{
+            height: "auto",
+          }}
+          exit={{
+            height: 0,
+          }}
+          className={cn("relative flex flex-col gap-1", className)}
+        >
+          <ProgressBar />
+          <div
+            className={cn(
+              "rounded-sm border border-white/5 p-2 pr-6 transition-colors !overflow-visible"
+            )}
+            style={{
+              backgroundColor: avgColor + "40",
+            }}
+          >
+            <QueueDrawer className="ml-auto mr-0" />
+            <div className="flex justify-between items-center h-[68px]">
+              <ActiveSong />
+              <Controls className="absolute left-1/2 -translate-x-1/2" />
+              <FaListUl
+                onClick={() => setIsVisible(true)}
+                className="ml-auto mr-6 text-white/60 transition-colors cursor-pointer duration-200 hover:text-primary"
+                size={20}
+              />
+              <VolumeControl />
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
 }

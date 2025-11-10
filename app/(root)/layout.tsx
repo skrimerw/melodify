@@ -35,7 +35,7 @@ export default async function Layout({
                     <div className="absolute -z-1 bg-gradient-to-b from-[var(--average-background-color)]/30 to-card h-1/3 top-0 left-0 right-0"></div>
                     <div className="px-6 py-4 min-h-full h-fit">{children}</div>
                 </BoxWrapper>
-                <AudioPlayer className="col-span-2 h-[94px]" />
+                <AudioPlayer className="col-span-2" />
             </main>
         </StoreProvider>
     );
