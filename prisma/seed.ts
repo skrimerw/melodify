@@ -2,7 +2,6 @@ import { albums, artists, songs } from "./constants";
 import { prisma } from "./prisma-client";
 import bcrypt from "bcrypt";
 import { crawledMusic } from "./crawled-music";
-import path from "path";
 
 async function insertCrawledMusic() {
     crawledMusic.forEach(async (music) => {
